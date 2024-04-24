@@ -1,0 +1,9 @@
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: ..\components\devices\arm_math\arm_mat_inverse_f64.c
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: ..\components\algorithm\Include\arm_math.h
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: ../Drivers/CMSIS/Include/core_cm4.h
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: ../Drivers/CMSIS/Include/cmsis_version.h
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+hzu_infantry_no1_c\arm_mat_inverse_f64.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
