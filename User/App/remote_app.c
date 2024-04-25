@@ -28,7 +28,7 @@ RC_ctrl_t rc_ctrl_data = {0};
   * @retval	
   * @note    
   */
-void get_remote_data(uint8_t *dbus_buff, RC_ctrl_t *rc_ctrl_data)					//解析遥控数据
+void get_remote_data(uint8_t *dbus_buff, RC_ctrl_t *rc_ctrl_data)					//解析遥控数据	**
 {
 	if(dbus_buff == NULL || rc_ctrl_data == NULL)
 	{

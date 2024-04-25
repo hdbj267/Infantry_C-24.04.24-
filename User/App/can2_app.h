@@ -5,35 +5,35 @@
 #include "struct_typedef.h"
 #include "can1_app.h"
 
-//#define RATE_BUF_SIZE 6  //µç»úËÙ¶È»¬¶¯ÂË²¨´°¿Ú´óĞ¡
+//#define RATE_BUF_SIZE 6  //ç”µæœºé€Ÿåº¦æ»‘åŠ¨æ»¤æ³¢çª—å£å¤§å°
 
 typedef struct
 {
 	
-	uint8_t robot_id;                           //»úÆ÷ÈËID
-	//·¢Éä»ú¹¹
-	uint16_t shooter_id1_17mm_cooling_rate;     //Ã¿ÃëÀäÈ´Öµ0£º17mmµÄ  1£º42mmµÄ  
-	uint16_t shooter_id1_17mm_cooling_limit;    //Ç¹¿ÚÈÈÁ¿ÉÏÏŞ
-	uint16_t shooter_id1_17mm_speed_limit;      //ËÙ¶ÈÉÏÏŞ
-	uint8_t mains_power_shooter_output ;        //µçÔ´ÊÇ·ñÊä³ö¸ø·¢Éä»ú¹¹
-	float bullet_speed;                         //µ±Ç°ÉäËÙ
-	uint16_t shooter_id1_17mm_cooling_heat;     //17mmµ±Ç°Ç¹¿ÚÈÈÁ¿
-	uint8_t hurt_type : 4;                      //0x2 ³¬ÉäËÙ¿ÛÑª£»0x3 ³¬Ç¹¿ÚÈÈÁ¿¿ÛÑª£»
+	uint8_t robot_id;                           //æœºå™¨äººID
+	//å‘å°„æœºæ„
+	uint16_t shooter_id1_17mm_cooling_rate;     //æ¯ç§’å†·å´å€¼0ï¼š17mmçš„  1ï¼š42mmçš„  
+	uint16_t shooter_id1_17mm_cooling_limit;    //æªå£çƒ­é‡ä¸Šé™
+	uint16_t shooter_id1_17mm_speed_limit;      //é€Ÿåº¦ä¸Šé™
+	uint8_t mains_power_shooter_output ;        //ç”µæºæ˜¯å¦è¾“å‡ºç»™å‘å°„æœºæ„
+	float bullet_speed;                         //å½“å‰å°„é€Ÿ
+	uint16_t shooter_id1_17mm_cooling_heat;     //17mmå½“å‰æªå£çƒ­é‡
+	uint8_t hurt_type : 4;                      //0x2 è¶…å°„é€Ÿæ‰£è¡€ï¼›0x3 è¶…æªå£çƒ­é‡æ‰£è¡€ï¼›
 
-} ext_Judge_data_t;                     //ÊµÊ±²ÃÅĞĞÅÏ¢   *hyj
+} ext_Judge_data_t;                     //å®æ—¶è£åˆ¤ä¿¡æ¯   *hyj
 
 typedef enum
 {	
 	CAN2_GIMBAL_STD_ID = 0x1FF,
-	CAN2_YAW_MOTOR_STD_ID = 0x205,	// yawµç»ú
-	CAN2_PITCH_MOTOR_STD_ID = 0x206,	//pitchµç»ú
-	//can2·¢
+	CAN2_YAW_MOTOR_STD_ID = 0x205,	// yawç”µæœº
+	CAN2_PITCH_MOTOR_STD_ID = 0x206,	//pitchç”µæœº
+	//can2å‘
 	CAN2_CONNECT_RC_CTRL_STD_ID = 0x200,
 	CAN2_CONNECT_CM_GYRO_STD_ID = 0x208,
 	CAN2_CONNECT_UIFLAG_STD_ID  = 0x209,
-	//can2ÊÕ
-	CAN2_SHOOT_17mm_ID = 0x020B,         //17mm·¢Éä»ú¹¹²ÃÅĞĞÅÏ¢
-	CAN2_SHOOT_JUDGE_ID = 0x020C,        //·¢Éä»ú¹¹²ÃÅĞĞÅÏ¢
+	//can2æ”¶
+	CAN2_SHOOT_17mm_ID = 0x020B,         //17mmå‘å°„æœºæ„è£åˆ¤ä¿¡æ¯
+	CAN2_SHOOT_JUDGE_ID = 0x020C,        //å‘å°„æœºæ„è£åˆ¤ä¿¡æ¯
 	
 } can2_msg_id_e;
 

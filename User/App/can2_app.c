@@ -5,7 +5,7 @@
  * @Teammate
  * @Version: V1.0
  * @Date: 2021.4.13
- * @Description:     CAN2Ó¦ÓÃ£¨AC°åĞÅÏ¢½»»¥¡¢yawÖápitchÖáµç»ú¿ØÖÆ£©           
+ * @Description:     CAN2åº”ç”¨ï¼ˆACæ¿ä¿¡æ¯äº¤äº’ã€yawè½´pitchè½´ç”µæœºæ§åˆ¶ï¼‰           
  * @Note:           
  * @Others: 
 **/
@@ -31,19 +31,19 @@ ext_Judge_data_t Judge_data;
   * @author         
   * @param[in] 
   * @retval	
-  * @note    Ä¬ÈÏµç»úµÄcan·¢ËÍÆµÂÊÎª1KHZ       
+  * @note    é»˜è®¤ç”µæœºçš„canå‘é€é¢‘ç‡ä¸º1KHZ       
   */
 static void gimbal_motor_msg_process(motor_msg_t *m,  uint8_t aData[])
 {
 	int16_t i;
-	m->encoder.filter_rate_sum = 0;//½øÈëÇåÁã
+	m->encoder.filter_rate_sum = 0;//è¿›å…¥æ¸…é›¶
 	if(m->encoder.raw_value !=  (aData[0]<<8|aData[1]))
 	{
 		m->encoder.last_raw_value = m->encoder.raw_value; 
 	}
-	if(m->encoder.start_flag==0)//ÉÏµç²É¼¯Ô­Ê¼½Ç¶È
+	if(m->encoder.start_flag==0)//ä¸Šç”µé‡‡é›†åŸå§‹è§’åº¦
 	{
-		m->encoder.ecd_bias = (aData[0]<<8)|aData[1];//³õÊ¼Î»ÖÃ
+		m->encoder.ecd_bias = (aData[0]<<8)|aData[1];//åˆå§‹ä½ç½®
 		m->encoder.last_raw_value = (aData[0]<<8)|aData[1];
 		m->encoder.raw_value = m->encoder.last_raw_value;
 		m->encoder.start_flag = 1;
@@ -54,8 +54,8 @@ static void gimbal_motor_msg_process(motor_msg_t *m,  uint8_t aData[])
 	}
 	
 	m->encoder.diff = m->encoder.raw_value - m->encoder.last_raw_value;
-	if(m->encoder.diff < -6000)//Á½´Î±àÂëÆ÷µÄ·´À¡Öµ²î±ğÌ«´ó£¬±íÊ¾È¦Êı·¢ÉúÁË¸Ä±ä                         
-	{                          //7500¸ù¾İ¿ØÖÆÖÜÆÚ¿Éµ÷£¬¼´±£Ö¤Ò»¸ö¿ØÖÆÖÜÆÚÄÚ ×ª×Ó»úĞµ½Ç¶È±ä»¯Ğ¡ÓÚ8191-7500=691µÄÁ¿ 
+	if(m->encoder.diff < -6000)//ä¸¤æ¬¡ç¼–ç å™¨çš„åé¦ˆå€¼å·®åˆ«å¤ªå¤§ï¼Œè¡¨ç¤ºåœˆæ•°å‘ç”Ÿäº†æ”¹å˜                         
+	{                          //7500æ ¹æ®æ§åˆ¶å‘¨æœŸå¯è°ƒï¼Œå³ä¿è¯ä¸€ä¸ªæ§åˆ¶å‘¨æœŸå†… è½¬å­æœºæ¢°è§’åº¦å˜åŒ–å°äº8191-7500=691çš„é‡ 
 		m->encoder.round_cnt ++;
 		m->encoder.ecd_raw_rate = m->encoder.diff + 8192;
 	}
@@ -68,7 +68,7 @@ static void gimbal_motor_msg_process(motor_msg_t *m,  uint8_t aData[])
 	{
 		m->encoder.ecd_raw_rate = m->encoder.diff;
 	}
-	//¼ÆËãµÃµ½½Ç¶ÈÖµ£¬·¶Î§Õı¸ºÎŞÇî´ó
+	//è®¡ç®—å¾—åˆ°è§’åº¦å€¼ï¼ŒèŒƒå›´æ­£è´Ÿæ— ç©·å¤§
 	m->encoder.ecd_angle = (float)(m->encoder.raw_value - m->encoder.ecd_bias)*360/8192  \
 								   + m->encoder.round_cnt * 360;
 	
@@ -77,13 +77,13 @@ static void gimbal_motor_msg_process(motor_msg_t *m,  uint8_t aData[])
 	{
 		m->encoder.buf_count = 0;
 	}
-	//¼ÆËãËÙ¶ÈÆ½¾ùÖµ
+	//è®¡ç®—é€Ÿåº¦å¹³å‡å€¼
 	for(i = 0;i < RATE_BUF_SIZE; i++)
 	{
 		m->encoder.filter_rate_sum += m->encoder.rate_buf[i];
 	}
 	m->encoder.filter_rate = (int32_t)(m->encoder.filter_rate_sum/RATE_BUF_SIZE);	
-	/*---------------------·Ç±àÂëÆ÷Êı¾İ------------------------*/
+	/*---------------------éç¼–ç å™¨æ•°æ®------------------------*/
 	m->speed_rpm = (uint16_t)(aData[2] << 8 | aData[3]);     
 	m->given_current = (uint16_t)(aData[4] << 8 | aData[5]); 
 	m->temperate = aData[6];     
@@ -97,7 +97,7 @@ static void gimbal_motor_msg_process(motor_msg_t *m,  uint8_t aData[])
   * @note           
   */
  
-void can2_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])
+void can2_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])	//***
 {
 	if(pHeader == NULL || aData == NULL )
 	{
@@ -116,7 +116,7 @@ void can2_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])
 			gimbal_motor_msg_process(&pitch_motor_msg ,aData); 
 			monitor.pitch_motor.time = xTaskGetTickCount();			
 		}break;
-		//»ñµÃ²ÃÅĞÏµÍ³µÄĞÅÏ¢   *hyj 
+		//è·å¾—è£åˆ¤ç³»ç»Ÿçš„ä¿¡æ¯   *hyj 
 		case CAN2_SHOOT_17mm_ID:
 		{
 			shoot_17mm_mag(&Judge_data ,aData); 
@@ -131,14 +131,14 @@ void can2_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])
 
 }
 
-void shoot_17mm_mag(ext_Judge_data_t *Judge_data, uint8_t aData[])
+void shoot_17mm_mag(ext_Judge_data_t *Judge_data, uint8_t aData[])	//***
 {
 	Judge_data->shooter_id1_17mm_cooling_rate   = ((int16_t)aData[0] << 8) | (int16_t)aData[1];
 	Judge_data->shooter_id1_17mm_cooling_limit  = ((int16_t)aData[2] << 8) | (int16_t)aData[3];
 	Judge_data->shooter_id1_17mm_speed_limit    = ((int16_t)aData[4] << 8) | (int16_t)aData[5];
 	Judge_data->shooter_id1_17mm_cooling_heat   = ((int16_t)aData[6] << 8) | (int16_t)aData[7];
 }
-void shoot_judge_process(ext_Judge_data_t *Judge_data, uint8_t aData[])
+void shoot_judge_process(ext_Judge_data_t *Judge_data, uint8_t aData[])	//***
 {
 	Judge_data->bullet_speed = ((float)((aData[0]<<8)|aData[1]))/100.0;
 	Judge_data->hurt_type = aData[2];
@@ -151,12 +151,12 @@ void shoot_judge_process(ext_Judge_data_t *Judge_data, uint8_t aData[])
   * @author         
   * @param[in] 
   * @retval	
-  * @note  ¸øµ×ÅÌµçµ÷°å·¢ËÍÖ¸Áî£¬IDºÅÎª0x200?µµ×ÅÌ·µ»ØIDÎª0x201-0x204
-		   -16384 ~ +16384 ¶ÔÓ¦-20A ~ +20A µçÁ÷¿ØÖÆ¾«¶È0.00122A
-		   µç»úµÄ·¢ËÍÆµÂÊÎª1KHZ£¬×ª×ÓÎ»ÖÃ0-8191 ¶ÔÓ¦ 360Ò²ÊÇ¾Í·Ö±æÂÊÎª0.04394531..(×ª×ÓµÄ)
-		   ¼õËÙ±ÈÎª1£º19 Ò²¾ÍÊÇ¶ÔÓ¦×ªÖá×ªËÙÎª·Ö±æÂÊÎª0.002312911       
+  * @note  ç»™åº•ç›˜ç”µè°ƒæ¿å‘é€æŒ‡ä»¤ï¼ŒIDå·ä¸º0x200?æ¡£ç€è°­ç¥·è±‚Dä¸º0x201-0x204
+		   -16384 ~ +16384 å¯¹åº”-20A ~ +20A ç”µæµæ§åˆ¶ç²¾åº¦0.00122A
+		   ç”µæœºçš„å‘é€é¢‘ç‡ä¸º1KHZï¼Œè½¬å­ä½ç½®0-8191 å¯¹åº” 360ä¹Ÿæ˜¯å°±åˆ†è¾¨ç‡ä¸º0.04394531..(è½¬å­çš„)
+		   å‡é€Ÿæ¯”ä¸º1ï¼š19 ä¹Ÿå°±æ˜¯å¯¹åº”è½¬è½´è½¬é€Ÿä¸ºåˆ†è¾¨ç‡ä¸º0.002312911       
   */
-void set_gimbal_behaviour(int16_t yaw_iq, int16_t pitch_iq)  
+void set_gimbal_behaviour(int16_t yaw_iq, int16_t pitch_iq)  //*
 {	
 	can2_tx_header.StdId = CAN2_GIMBAL_STD_ID;
     can2_tx_header.IDE = CAN_ID_STD;

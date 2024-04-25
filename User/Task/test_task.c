@@ -2,10 +2,10 @@
  * @Copyright(C),
  * @FileName:.c
  * @Author: HongYuJia  
- * @Teammate£º
+ * @Teammateï¼š
  * @Version: V3.0
  * @Date:2020.4.13
- * @Description:   ²âÊÔÈÎÎñ£¬ÓÃÓÚ²é¿´²¢¼ì²âÏµÍ³ÔËĞĞ×´Ì¬
+ * @Description:   æµ‹è¯•ä»»åŠ¡ï¼Œç”¨äºæŸ¥çœ‹å¹¶æ£€æµ‹ç³»ç»Ÿè¿è¡ŒçŠ¶æ€
  * @Note:       
  * @Others: 
 **/
@@ -68,10 +68,10 @@ volatile uint32_t flash_data = 0;
 
 
 const u8 TEXT_Buffer[]={"STM32 FLASH TEST"};
-#define TEXT_LENTH sizeof(TEXT_Buffer)	 		  	//Êı×é³¤¶È	
+#define TEXT_LENTH sizeof(TEXT_Buffer)	 		  	//æ•°ç»„é•¿åº¦	
 #define SIZE TEXT_LENTH/4+((TEXT_LENTH%4)?1:0)
 
-#define FLASH_SAVE_ADDR  0x080C0000 	//ÉèÖÃFLASH ±£´æµØÖ·(±ØĞëÎª4µÄ±¶Êı£¬ÇÒËùÔÚÉÈÇø,Òª´óÓÚ±¾´úÂëËùÕ¼ÓÃµ½µÄÉÈÇø.
+#define FLASH_SAVE_ADDR  0x080C0000 	//è®¾ç½®FLASH ä¿å­˜åœ°å€(å¿…é¡»ä¸º4çš„å€æ•°ï¼Œä¸”æ‰€åœ¨æ‰‡åŒº,è¦å¤§äºæœ¬ä»£ç æ‰€å ç”¨åˆ°çš„æ‰‡åŒº.
 
 u8 datatemp[SIZE];
 extern TaskHandle_t Gimbal_Task_Handler;
@@ -96,21 +96,21 @@ void test_task(void *argument)
 //		LED_PrintValueI(40, 0, shoot_control_data.trigger_position_angle_set);
 
 /**
-* @brief ¸÷ÈÎÎñÔËĞĞÊ±¼äÊä³ö
+* @brief å„ä»»åŠ¡è¿è¡Œæ—¶é—´è¾“å‡º
 * @note    
 */
 #if 1 //0   *hyj
-		memset(ch,0,400);				//ĞÅÏ¢»º³åÇøÇåÁã
-		vTaskGetRunTimeStats(ch);		//»ñÈ¡ÈÎÎñÔËĞĞÊ±¼äĞÅÏ¢
-		// printf("#ÈÎÎñÃû\t\t\tÔËĞĞÊ±¼ä\tÔËĞĞËùÕ¼°Ù·Ö±È\r\n");   //·¢Êı¾İ¸ø´®¿Ú   *hyj
+		memset(ch,0,400);				//ä¿¡æ¯ç¼“å†²åŒºæ¸…é›¶
+		vTaskGetRunTimeStats(ch);		//è·å–ä»»åŠ¡è¿è¡Œæ—¶é—´ä¿¡æ¯
+		// printf("#ä»»åŠ¡å\t\t\tè¿è¡Œæ—¶é—´\tè¿è¡Œæ‰€å ç™¾åˆ†æ¯”\r\n");   //å‘æ•°æ®ç»™ä¸²å£   *hyj
 		// printf("%s\r\n", ch);
 		
 /**
-* @brief ¸÷ÈÎÎñÔËĞĞ×´Ì¬Êä³ö
+* @brief å„ä»»åŠ¡è¿è¡ŒçŠ¶æ€è¾“å‡º
 * @note    
 */	
 #elif 0 		
-		memset(ch,0,400);				//ĞÅÏ¢»º³åÇøÇåÁã
+		memset(ch,0,400);				//ä¿¡æ¯ç¼“å†²åŒºæ¸…é›¶
 		vTaskList(ch);
 		printf("task_name\ttask_state\tpriority\tstack\ttasK_num\r\n");
 		printf("%s\r\n", ch);
@@ -122,22 +122,22 @@ void test_task(void *argument)
 		TaskHandle_t TaskHandle;	
 		TaskStatus_t TaskStatus;
 
-		TaskHandle=xTaskGetHandle("GUI_task");		//¸ù¾İÈÎÎñÃû»ñÈ¡ÈÎÎñ¾ä±ú¡£
+		TaskHandle=xTaskGetHandle("GUI_task");		//æ ¹æ®ä»»åŠ¡åè·å–ä»»åŠ¡å¥æŸ„ã€‚
 
-		vTaskGetInfo((TaskHandle_t	)TaskHandle, 		//ÈÎÎñ¾ä±ú
-					 (TaskStatus_t*	)&TaskStatus, 		//ÈÎÎñĞÅÏ¢½á¹¹Ìå
-					 (BaseType_t	)pdTRUE,			//ÔÊĞíÍ³¼ÆÈÎÎñ¶ÑÕ»ÀúÊ·×îĞ¡Ê£Óà´óĞ¡
-					 (eTaskState	)eInvalid);			//º¯Êı×Ô¼º»ñÈ¡ÈÎÎñÔËĞĞ×´Ì¬
+		vTaskGetInfo((TaskHandle_t	)TaskHandle, 		//ä»»åŠ¡å¥æŸ„
+					 (TaskStatus_t*	)&TaskStatus, 		//ä»»åŠ¡ä¿¡æ¯ç»“æ„ä½“
+					 (BaseType_t	)pdTRUE,			//å…è®¸ç»Ÿè®¡ä»»åŠ¡å †æ ˆå†å²æœ€å°å‰©ä½™å¤§å°
+					 (eTaskState	)eInvalid);			//å‡½æ•°è‡ªå·±è·å–ä»»åŠ¡è¿è¡ŒçŠ¶æ€
 
-		printf("ÈÎÎñÃû:                %s\r\n",TaskStatus.pcTaskName);
-		printf("ÈÎÎñ±àºÅ:              %d\r\n",(int)TaskStatus.xTaskNumber);
-		printf("ÈÎÎñ×´Ì¬:              %d\r\n",TaskStatus.eCurrentState);
-		printf("ÈÎÎñµ±Ç°ÓÅÏÈ¼¶:        %d\r\n",(int)TaskStatus.uxCurrentPriority);
-		printf("ÈÎÎñ»ùÓÅÏÈ¼¶:          %d\r\n",(int)TaskStatus.uxBasePriority);
-		printf("ÔËĞĞÊ±¼ä¼ÆÊı:          %d\r\n",(int)TaskStatus.ulRunTimeCounter);
-		printf("ÈÎÎñ¶ÑÕ»»ùµØÖ·:        %#x\r\n",(int)TaskStatus.pxStackBase);
-		printf("ÈÎÎñ¶ÑÕ»ÀúÊ·Ê£Óà×îĞ¡Öµ:%d\r\n",TaskStatus.usStackHighWaterMark);	
-	    printf("/**************************½áÊø***************************/\r\n");	
+		printf("ä»»åŠ¡å:                %s\r\n",TaskStatus.pcTaskName);
+		printf("ä»»åŠ¡ç¼–å·:              %d\r\n",(int)TaskStatus.xTaskNumber);
+		printf("ä»»åŠ¡çŠ¶æ€:              %d\r\n",TaskStatus.eCurrentState);
+		printf("ä»»åŠ¡å½“å‰ä¼˜å…ˆçº§:        %d\r\n",(int)TaskStatus.uxCurrentPriority);
+		printf("ä»»åŠ¡åŸºä¼˜å…ˆçº§:          %d\r\n",(int)TaskStatus.uxBasePriority);
+		printf("è¿è¡Œæ—¶é—´è®¡æ•°:          %d\r\n",(int)TaskStatus.ulRunTimeCounter);
+		printf("ä»»åŠ¡å †æ ˆåŸºåœ°å€:        %#x\r\n",(int)TaskStatus.pxStackBase);
+		printf("ä»»åŠ¡å †æ ˆå†å²å‰©ä½™æœ€å°å€¼:%d\r\n",TaskStatus.usStackHighWaterMark);	
+	    printf("/**************************ç»“æŸ***************************/\r\n");	
 #endif		
 		vTaskDelay(100);
 		

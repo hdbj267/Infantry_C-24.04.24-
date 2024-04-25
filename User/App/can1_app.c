@@ -5,8 +5,8 @@
  * @Teammate
  * @Version: V1.0
  * @Date: 2021.4.13
- * @Description:     CAN1Ó¦ÓÃ£¨·¢Éä»ú¹¹µç»úµÄ¿ØÖÆ£©           
- * @Note:            ÓÃcubeMXÉú³Éºó£¬µ×²ãCANµÄÅäÖÃ²ÎÊı»á±»ĞŞ¸Ä£¬¼ÇµÃ¸Ä»ØÈ¥
+ * @Description:     CAN1åº”ç”¨ï¼ˆå‘å°„æœºæ„ç”µæœºçš„æ§åˆ¶ï¼‰           
+ * @Note:            ç”¨cubeMXç”Ÿæˆåï¼Œåº•å±‚CANçš„é…ç½®å‚æ•°ä¼šè¢«ä¿®æ”¹ï¼Œè®°å¾—æ”¹å›å»
  * 						 hcan1.Init.TimeSeg1 = CAN_BS1_10TQ;
  						 hcan1.Init.TimeSeg2 = CAN_BS2_3TQ;    
  * @Others: 
@@ -35,19 +35,19 @@ motor_msg_t trigger_motor_msg = {0};
   * @author         
   * @param[in] 
   * @retval	
-  * @note    Ä¬ÈÏµç»úµÄcan·¢ËÍÆµÂÊÎª1KHZ       
+  * @note    é»˜è®¤ç”µæœºçš„canå‘é€é¢‘ç‡ä¸º1KHZ       
   */
-static void shoot_motor_msg_process(motor_msg_t *m, uint8_t aData[])
+static void shoot_motor_msg_process(motor_msg_t *m, uint8_t aData[])	//*
 {
 	int16_t i;
-	m->encoder.filter_rate_sum = 0;//½øÈëÇåÁã
+	m->encoder.filter_rate_sum = 0;//è¿›å…¥æ¸…é›¶
 	if(m->encoder.raw_value !=  (aData[0]<<8|aData[1]))
 	{
 		m->encoder.last_raw_value = m->encoder.raw_value; 
 	}
-	if(m->encoder.start_flag==0)//ÉÏµç²É¼¯Ô­Ê¼½Ç¶È
+	if(m->encoder.start_flag==0)//ä¸Šç”µé‡‡é›†åŸå§‹è§’åº¦
 	{
-		m->encoder.ecd_bias = (aData[0]<<8)|aData[1];//³õÊ¼Î»ÖÃ
+		m->encoder.ecd_bias = (aData[0]<<8)|aData[1];//åˆå§‹ä½ç½®
 		m->encoder.last_raw_value = (aData[0]<<8)|aData[1];
 		m->encoder.raw_value = m->encoder.last_raw_value;
 		m->encoder.start_flag = 1;
@@ -58,8 +58,8 @@ static void shoot_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 	}
 	
 	m->encoder.diff = m->encoder.raw_value - m->encoder.last_raw_value;
-	if(m->encoder.diff < -6000)//Á½´Î±àÂëÆ÷µÄ·´À¡Öµ²î±ğÌ«´ó£¬±íÊ¾È¦Êı·¢ÉúÁË¸Ä±ä                         
-	{                          //7500¸ù¾İ¿ØÖÆÖÜÆÚ¿Éµ÷£¬¼´±£Ö¤Ò»¸ö¿ØÖÆÖÜÆÚÄÚ ×ª×Ó»úĞµ½Ç¶È±ä»¯Ğ¡ÓÚ8191-7500=691µÄÁ¿ 
+	if(m->encoder.diff < -6000)//ä¸¤æ¬¡ç¼–ç å™¨çš„åé¦ˆå€¼å·®åˆ«å¤ªå¤§ï¼Œè¡¨ç¤ºåœˆæ•°å‘ç”Ÿäº†æ”¹å˜                         
+	{                          //7500æ ¹æ®æ§åˆ¶å‘¨æœŸå¯è°ƒï¼Œå³ä¿è¯ä¸€ä¸ªæ§åˆ¶å‘¨æœŸå†… è½¬å­æœºæ¢°è§’åº¦å˜åŒ–å°äº8191-7500=691çš„é‡ 
 		m->encoder.round_cnt ++;
 		m->encoder.ecd_raw_rate = m->encoder.diff + 8192;
 	}
@@ -72,7 +72,7 @@ static void shoot_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 	{
 		m->encoder.ecd_raw_rate = m->encoder.diff;
 	}
-	//¼ÆËãµÃµ½½Ç¶ÈÖµ£¬·¶Î§Õı¸ºÎŞÇî´ó
+	//è®¡ç®—å¾—åˆ°è§’åº¦å€¼ï¼ŒèŒƒå›´æ­£è´Ÿæ— ç©·å¤§
 	m->encoder.ecd_angle = (float)(m->encoder.raw_value - m->encoder.ecd_bias)*360/8192  \
 								   + m->encoder.round_cnt * 360;
 	
@@ -81,13 +81,13 @@ static void shoot_motor_msg_process(motor_msg_t *m, uint8_t aData[])
 	{
 		m->encoder.buf_count = 0;
 	}
-	//¼ÆËãËÙ¶ÈÆ½¾ùÖµ
+	//è®¡ç®—é€Ÿåº¦å¹³å‡å€¼
 	for(i = 0;i < RATE_BUF_SIZE; i++)
 	{
 		m->encoder.filter_rate_sum += m->encoder.rate_buf[i];
 	}
 	m->encoder.filter_rate = (int32_t)(m->encoder.filter_rate_sum/RATE_BUF_SIZE);	
-	/*---------------------·Ç±àÂëÆ÷Êı¾İ------------------------*/
+	/*---------------------éç¼–ç å™¨æ•°æ®------------------------*/
 	m->speed_rpm = (uint16_t)(aData[2] << 8 | aData[3]);     				
 	m->given_current = (uint16_t)(aData[4] << 8 | aData[5]); 				
 	m->temperate = aData[6];         
@@ -100,7 +100,7 @@ static void shoot_motor_msg_process(motor_msg_t *m, uint8_t aData[])
   * @retval	
   * @note           
   */
-void can1_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])
+void can1_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])	//**
 {
 	if(pHeader == NULL || aData == NULL )
 	{
@@ -128,14 +128,15 @@ void can1_message_progress(CAN_RxHeaderTypeDef *pHeader, uint8_t aData[])
 	}
 }
 /**
-  * @brief          ·¢ËÍµçÁ÷Öµ¸øµç»ú
+  * @brief          å‘é€ç”µæµå€¼ç»™ç”µæœº
   * @author         
   * @param[in] 
   * @retval	
   * @note         
   */
-void set_shoot_behaviour(int16_t fric1_iq,   \			
-						 int16_t fric2_iq,	 \
+void set_shoot_behaviour(int16_t fric1_iq,   		//***
+						 int16_t fric2_iq,	 
+
 						 int16_t trigger_iq)  
 {
 	//can1

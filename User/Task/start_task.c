@@ -2,10 +2,10 @@
  * @Copyright(C),
  * @FileName:.c
  * @Author: HongYuJia  
- * @Teammate£º
+ * @Teammateï¼š
  * @Version: V3.0
  * @Date:2020.4.13
- * @Description:  ¿ªÊ¼ÈÎÎñ£¬ÓÃÓÚ´´½¨ËùÓĞÏß³Ì£¬ÓÃÍê¾ÍĞİÃß£¡
+ * @Description:  å¼€å§‹ä»»åŠ¡ï¼Œç”¨äºåˆ›å»ºæ‰€æœ‰çº¿ç¨‹ï¼Œç”¨å®Œå°±ä¼‘çœ ï¼
  * @Note:       
  * @Others: 
 **/
@@ -96,7 +96,7 @@ void cali_task(void *argument);
 
 void start_task(void *argument)
 {
-  /* Ëø×¡RTOSÄÚºË·ÀÖ¹Êı¾İ½âÎö¹ı³ÌÖĞ¶Ï£¬Ôì³É´íÎó */
+  /* é”ä½RTOSå†…æ ¸é˜²æ­¢æ•°æ®è§£æè¿‡ç¨‹ä¸­æ–­ï¼Œé€ æˆé”™è¯¯ */
 	osKernelLock();
 	//create gimbal_task	
 	Gimbal_Task_Handler = osThreadNew(gimbal_task, NULL, &Gimbal_Task_attr);
@@ -113,9 +113,9 @@ void start_task(void *argument)
 	//create monitor_task		
 	Monitor_Task_Handler = osThreadNew(monitor_task, NULL, &Monitor_Task_attr); 							
 	//create cali_task		
-	//Cali_Task_Handler = osThreadNew(cali_task, NULL, &Cali_Task_attr);     //´®¿Ú¸øÊÓ¾õÓÃÁË
-  //½âËø
+	//Cali_Task_Handler = osThreadNew(cali_task, NULL, &Cali_Task_attr);     //ä¸²å£ç»™è§†è§‰ç”¨äº†
+  //è§£é”
   osKernelUnlock();
 
-  osThreadTerminate(osThreadGetId()); /* ½áÊø×ÔÉí */
+  osThreadTerminate(osThreadGetId()); /* ç»“æŸè‡ªèº« */
 }

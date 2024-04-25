@@ -2,10 +2,10 @@
  * @Copyright(C),
  * @FileName:.c
  * @Author: HongYuJia  
- * @Teammate£º
+ * @Teammateï¿½ï¿½
  * @Version: V3.0
  * @Date:2020.4.13
- * @Description: ¹ØÓÚAC°åÖ®¼äµÄÐÅÏ¢½»»¥
+ * @Description: ï¿½ï¿½ï¿½ï¿½ACï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
  * @Note:       
  * @Others: 
 **/
@@ -39,7 +39,7 @@ _tx2_tx_data vision_tx_data;
 
 
 /**
-* @brief        can2»ñÈ¡rcÊý¾Ý ·¢ËÍÍùµ×ÅÌ
+* @brief        can2ï¿½ï¿½È¡rcï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   * @author         
   * @param[in]      
   * @retval			
@@ -55,7 +55,7 @@ void can2_get_rc_data(connect_t *connect_data)
 													  RC_CHANNEL_VALUE_MIDDLE;
 	connect_data->can2_rc_ctrl.mouse.key = connect_data->rc_ctrl->key.v;
 }
-void send_rc_to_chassis(can2_rc_ctrl_t *can2_rc_ctrl)  
+void send_rc_to_chassis(can2_rc_ctrl_t *can2_rc_ctrl)  //**
 {
 	can2_tx_header.StdId = CAN2_CONNECT_RC_CTRL_STD_ID;
     can2_tx_header.IDE = CAN_ID_STD;
@@ -78,7 +78,7 @@ void send_rc_to_chassis(can2_rc_ctrl_t *can2_rc_ctrl)
 
 extern int8_t vision_flag;
 
-void send_uiflag_to_chassis(void)  
+void send_uiflag_to_chassis(void)  //**
 {
 	can2_tx_header.StdId = CAN2_CONNECT_UIFLAG_STD_ID;
     can2_tx_header.IDE = CAN_ID_STD;
@@ -86,8 +86,8 @@ void send_uiflag_to_chassis(void)
     can2_tx_header.DLC = 0x02;
     
 		uint8_t ui_data[8];
-    ui_data[0] = (uint8_t)(control_data.recog_flag);		//½ÓÊÕµ½Ð¡µçÄÔÊý¾ÝµÄ±êÖ¾Î»
-    ui_data[1] = (int8_t)(vision_flag);									//Ð¡µçÄÔ¿ªÆôµÄ±êÖ¾Î»
+    ui_data[0] = (uint8_t)(control_data.recog_flag);		//ï¿½ï¿½ï¿½Õµï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ±ï¿½Ö¾Î»
+    ui_data[1] = (int8_t)(vision_flag);									//Ð¡ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½Ä±ï¿½Ö¾Î»
     ui_data[2] = 0;
     ui_data[3] = 0;
     ui_data[4] = 0;
@@ -98,7 +98,7 @@ void send_uiflag_to_chassis(void)
 }
 
 /**
-* @brief        can2»ñÈ¡GYROÍÓÂÝÒÇÊý¾Ý£¬·¢ËÍÍùµ×ÅÌ
+* @brief        can2ï¿½ï¿½È¡GYROï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   * @author         
   * @param[in]      
   * @retval			
@@ -110,7 +110,7 @@ typedef union float_char_
 	uint8_t c[4];
 }float_char;
 extern gimbal_control_data_t gimbal_control_data;
-void send_gyro_data_to_chassis(void)  
+void send_gyro_data_to_chassis(void)  //**
 {
 	can2_tx_header.StdId = CAN2_CONNECT_CM_GYRO_STD_ID;
     can2_tx_header.IDE = CAN_ID_STD;
@@ -136,9 +136,9 @@ void send_gyro_data_to_chassis(void)
 uint8_t tx_data[22];
  communication_t communication;
 
-void vision_tx(_tx2_tx_data *vision_tx_data,INS_t *INS)
+void vision_tx(_tx2_tx_data *vision_tx_data,INS_t *INS)		//****
 {
-		if(Judge_data.robot_id < 10) //¼º·½ºìÉ«
+		if(Judge_data.robot_id < 10) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
 		vision_tx_data->robot_color=0;
 		else
 		vision_tx_data->robot_color=1;
@@ -160,22 +160,22 @@ void vision_tx(_tx2_tx_data *vision_tx_data,INS_t *INS)
 		unsigned char* ptr = (unsigned char*)&(vision_tx_data->yaw);
 		tx_data[4] = *(ptr + 0);
 		tx_data[5] = *(ptr + 1);
-    tx_data[6] = *(ptr + 2);  // »ñÈ¡µÍÎ»×Ö½Ú
+    tx_data[6] = *(ptr + 2);  // ï¿½ï¿½È¡ï¿½ï¿½Î»ï¿½Ö½ï¿½
     tx_data[7] = *(ptr + 3);
 		ptr = (unsigned char*)&(vision_tx_data->pitch);
 		tx_data[8] =  *(ptr +  0);
 		tx_data[9] =  *(ptr +  1);
-    tx_data[10] = *(ptr + 2);  // »ñÈ¡µÍÎ»×Ö½Ú
+    tx_data[10] = *(ptr + 2);  // ï¿½ï¿½È¡ï¿½ï¿½Î»ï¿½Ö½ï¿½
     tx_data[11] = *(ptr + 3);		
 //		tx_data[12]=(vision_tx_data->gyro_accle);
 //		tx_data[13]=(vision_tx_data->gyro_accle<<8);
 		communication.aaa = (float)(vision_tx_data->gyro_x);
-    tx_data[12] =  communication.bbb[0];  // »ñÈ¡µÍÎ»×Ö½Ú
+    tx_data[12] =  communication.bbb[0];  // ï¿½ï¿½È¡ï¿½ï¿½Î»ï¿½Ö½ï¿½
     tx_data[13] =  communication.bbb[1];
 		tx_data[14] =  communication.bbb[2];
 		tx_data[15] =  communication.bbb[3];
 		communication.aaa = (float)(vision_tx_data->gyro_y);
-    tx_data[12] =  communication.bbb[0];  // »ñÈ¡µÍÎ»×Ö½Ú
+    tx_data[12] =  communication.bbb[0];  // ï¿½ï¿½È¡ï¿½ï¿½Î»ï¿½Ö½ï¿½
     tx_data[13] =  communication.bbb[1];
 		tx_data[14] =  communication.bbb[2];
 		tx_data[15] =  communication.bbb[3];
@@ -186,7 +186,7 @@ void vision_tx(_tx2_tx_data *vision_tx_data,INS_t *INS)
 
 
 /**
-  * @brief          Á¬½Ó³õÊ¼»¯
+  * @brief          ï¿½ï¿½ï¿½Ó³ï¿½Ê¼ï¿½ï¿½
   * @author         
   * @param[in]      
   * @retval			
@@ -196,12 +196,12 @@ void connect_init(connect_t *connect_data)
 {
 	connect_data->rc_ctrl = get_rc_data_point();
 	
-//	vTaskSuspendAll();//¹ÒÆðÈÎÎñµ÷¶ÈÆ÷
-//	check_connect(connect_data);//Èç¹ûÎ´Á¬½Ó½«ÎÞ·¨ÍË³öÑ­»·£¬ÔÆÌ¨Ò²²»»á·¢ËÍrcÊý¾Ý
+//	vTaskSuspendAll();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//	check_connect(connect_data);//ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½Ó½ï¿½ï¿½Þ·ï¿½ï¿½Ë³ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨Ò²ï¿½ï¿½ï¿½á·¢ï¿½ï¿½rcï¿½ï¿½ï¿½ï¿½
 //	xTaskResumeAll();
 }
 /**
-  * @brief         Á¬½Óµ×ÅÌÈÎÎñ
+  * @brief         ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   * @author         
   * @param[in]      
   * @retval			
@@ -217,13 +217,13 @@ void connect_task(void *argument)
 	connect_init(&connect_data);
 	while(1)
 	{
-		// current_time = xTaskGetTickCount();                         //µ±Ç°ÏµÍ³Ê±¼ä       *hyj
-		can2_get_rc_data(&connect_data);										//»ñÈ¡Ò£¿ØÆ÷Êý¾Ý£¬µ«ÊÇ
+		// current_time = xTaskGetTickCount();                         //ï¿½ï¿½Ç°ÏµÍ³Ê±ï¿½ï¿½       *hyj
+		can2_get_rc_data(&connect_data);										//ï¿½ï¿½È¡Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½
 		
-		send_rc_to_chassis(&connect_data.can2_rc_ctrl);			//·¢ËÍÒ£¿ØÆ÷¿ØÖÆ|¼üÊóÊý¾ÝÖÁµ×ÅÌ
-		vision_tx(&vision_tx_data,&INS);										//´®¿ÚÒ»·¢ËÍÔÆÌ¨×ËÌ¬Êý¾ÝÖÁÐ¡µçÄÔ
-		send_uiflag_to_chassis();														//·¢ËÍÊÓ¾õ±êÖ¾Î»µ½µ×ÅÌ£¬ÓÃÓÚ»­UI
-		vTaskDelay(50);                         						// 10msÒ»´Î
+		send_rc_to_chassis(&connect_data.can2_rc_ctrl);			//ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		vision_tx(&vision_tx_data,&INS);										// **  ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
+		send_uiflag_to_chassis();														//ï¿½ï¿½ï¿½ï¿½ï¿½Ó¾ï¿½ï¿½ï¿½Ö¾Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½Ú»ï¿½UI
+		vTaskDelay(50);                         						// 10msÒ»ï¿½ï¿½
 		   
 	}
 }

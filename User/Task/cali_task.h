@@ -6,8 +6,8 @@
 #include "can1_app.h"
 #include "connect_task.h"
 
-#define CALI_CHECK               (59u)       //pid²ÎÊı±êÖ¾
-#define CALI_PARAM_FEATURE       (30u)       //×Ô¶¨Òå²ÎÊı±êÖ¾
+#define CALI_CHECK               (59u)       //pidå‚æ•°æ ‡å¿—
+#define CALI_PARAM_FEATURE       (30u)       //è‡ªå®šä¹‰å‚æ•°æ ‡å¿—
 
 typedef enum
 {
@@ -26,7 +26,7 @@ typedef enum
 	
 }pid_type_e;
 
-#pragma pack(push, 1) //·ÀÖ¹±àÒëÆ÷4×Ö½Ú¶ÔÆë µ¼ÖÂ×ª»»³ÉfloatÊ§°Ü£¨Ö®Ç°µÄÑ¹Õ»£©
+#pragma pack(push, 1) //é˜²æ­¢ç¼–è¯‘å™¨4å­—èŠ‚å¯¹é½ å¯¼è‡´è½¬æ¢æˆfloatå¤±è´¥ï¼ˆä¹‹å‰çš„å‹æ ˆï¼‰
 
 typedef struct
 {
@@ -34,7 +34,7 @@ typedef struct
 	uint8_t cali_i_array[4];
 	uint8_t cali_d_array[4];
 	
-	uint8_t cali_param1_array[4]; //×Ô¶¨Òå²ÎÊıÊı×é
+	uint8_t cali_param1_array[4]; //è‡ªå®šä¹‰å‚æ•°æ•°ç»„
 	uint8_t cali_param2_array[4];
 	uint8_t cali_param3_array[4];
 	uint8_t cali_param4_array[4];
@@ -49,19 +49,19 @@ typedef struct
 	float i;
 	float d;
 	
-	float param1; //×Ô¶¨Òå²ÎÊı ¿ÉÒÔÖ±½Ó¸³Öµ¸øÆäËûµÄµ÷ÊÔ²ÎÊı
+	float param1; //è‡ªå®šä¹‰å‚æ•° å¯ä»¥ç›´æ¥èµ‹å€¼ç»™å…¶ä»–çš„è°ƒè¯•å‚æ•°
 	float param2;
 	float param3;
 	float param4;
 	float param5;
 	float param6;
 	
-	uint8_t receive_success_flag; //½ÓÊÕpcÊı¾İ³É¹¦±êÖ¾Î»
-	uint8_t beep_flag;            //ÌáÊ¾±êÖ¾Î»
+	uint8_t receive_success_flag; //æ¥æ”¶pcæ•°æ®æˆåŠŸæ ‡å¿—ä½
+	uint8_t beep_flag;            //æç¤ºæ ‡å¿—ä½
 	
 } pc_cali_t;
 
-#pragma pack(pop) //»Ö¸´Ö®Ç°×Ö½Ú¶ÔÆëÊı
+#pragma pack(pop) //æ¢å¤ä¹‹å‰å­—èŠ‚å¯¹é½æ•°
 
 typedef struct
 {

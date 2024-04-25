@@ -2,13 +2,13 @@
  * @Copyright(C),
  * @FileName:.c
  * @Author: HuangYe
- * @Teammate£º
+ * @Teammateï¼š
  * @Version: V3.0
  * @Date:2020.3.10
- * @Description:          ¼à¿ØÈÎÎñÈ·¶¨¸÷¸öÄ£¿éÊÇ·ñÔÚÏß
- * @Others:               Ä¿Ç°µÄÎÊÌâ£ºoledË¢ÆÁº¯Êı»áµ¼ÖÂgui¹¤×÷²»Õı³£¡£¿ª»úÒ»Ë²¼ä·äÃùÆ÷
-						  »ØÏì£¬¿ª»úÄÇ»á¼ì²âµ½ÀëÏß£¨ÎÊÌâ£©¡£ÊÇ·ñĞèÒª¹ÒÆğÈÎÎñ£¬Âß¼­»¹
-						  ÓĞ´ıË¼¿¼¡£
+ * @Description:          ç›‘æ§ä»»åŠ¡ç¡®å®šå„ä¸ªæ¨¡å—æ˜¯å¦åœ¨çº¿
+ * @Others:               ç›®å‰çš„é—®é¢˜ï¼šoledåˆ·å±å‡½æ•°ä¼šå¯¼è‡´guiå·¥ä½œä¸æ­£å¸¸ã€‚å¼€æœºä¸€ç¬é—´èœ‚é¸£å™¨
+						  å›å“ï¼Œå¼€æœºé‚£ä¼šæ£€æµ‹åˆ°ç¦»çº¿ï¼ˆé—®é¢˜ï¼‰ã€‚æ˜¯å¦éœ€è¦æŒ‚èµ·ä»»åŠ¡ï¼Œé€»è¾‘è¿˜
+						  æœ‰å¾…æ€è€ƒã€‚
 **/
 #include "monitor_task.h"
 #include "test_task.h"
@@ -39,9 +39,9 @@ extern TaskHandle_t Cali_Task_Handler;
   */
 monitor_t monitor = 
 {
-	.remote.enable_flag = 1, //Ê¹ÄÜµÄÄ£¿é²Å×ö´¦Àí
+	.remote.enable_flag = 1, //ä½¿èƒ½çš„æ¨¡å—æ‰åšå¤„ç†
 	.remote.error_msg = (uint8_t *)"remote error",
-	.remote.timeout = 500,//³¬Ê±Ê±¼äÉèÖÃ
+	.remote.timeout = 500,//è¶…æ—¶æ—¶é—´è®¾ç½®
 	
 	.yaw_motor.enable_flag = 1,
 	.yaw_motor.error_msg = (uint8_t *)"yaw_motor error",
@@ -76,23 +76,23 @@ void is_lost(monitor_t *monitor, error_t *error)
 	{
 		if(monitor->system_current_time > error->time + error->timeout)
 		{
-			if(monitor->error_cnt < 8 && error->lost_flag == 0)//´óÓÚ8²»ÔÙÏÔÊ¾
+			if(monitor->error_cnt < 8 && error->lost_flag == 0)//å¤§äº8ä¸å†æ˜¾ç¤º
 			{
 				error->lost_flag = 1;
-//				error->error_oled_row = monitor->error_cnt;//±£´æµ±Ç°´íÎóËùÏÔÊ¾µÄoledĞĞ
-				monitor->error_cnt ++;//´íÎóÊıÁ¿¼Ó
+//				error->error_oled_row = monitor->error_cnt;//ä¿å­˜å½“å‰é”™è¯¯æ‰€æ˜¾ç¤ºçš„oledè¡Œ
+				monitor->error_cnt ++;//é”™è¯¯æ•°é‡åŠ 
 			}
 		}
 		else
 		{
-			if(error->lost_flag == 1)//»Ö¸´ÁË
+			if(error->lost_flag == 1)//æ¢å¤äº†
 			{
-				error->lost_flag = 0;//¶ªÊ§±êÖ¾Î»¸´Î»
-				monitor->error_cnt --;//×ÜÊı¼õ1
+				error->lost_flag = 0;//ä¸¢å¤±æ ‡å¿—ä½å¤ä½
+				monitor->error_cnt --;//æ€»æ•°å‡1
 //				monitor->single_error_resume_flag = 1;
-//				monitor->single_error_resume_row = error->error_oled_row;//±£´æÖ®Ç°µÄoledÎ»ÖÃ
-//				error->error_oled_row = 0;//¸´Î»
-//				LED_Fill(0x00);//¿ª»úË²¼ä¼ì²âµ½Ä£¿éÀëÏß£¬ÔËĞĞµ½ÕâÀï£¬Ö´ĞĞÇåÆÁµ¼ÖÂoledGUI¿ª»ú»áÓĞÒì³£
+//				monitor->single_error_resume_row = error->error_oled_row;//ä¿å­˜ä¹‹å‰çš„oledä½ç½®
+//				error->error_oled_row = 0;//å¤ä½
+//				LED_Fill(0x00);//å¼€æœºç¬é—´æ£€æµ‹åˆ°æ¨¡å—ç¦»çº¿ï¼Œè¿è¡Œåˆ°è¿™é‡Œï¼Œæ‰§è¡Œæ¸…å±å¯¼è‡´oledGUIå¼€æœºä¼šæœ‰å¼‚å¸¸
 			}
 		}
 	}
@@ -111,13 +111,13 @@ void error_list_display(monitor_t *monitor, error_t *error)
 	{
 		if(error->lost_flag == 1)
 		{
-	//		if(monitor->single_error_resume_flag)//´æÔÚÒ»¸ö´íÎó»Ö¸´
+	//		if(monitor->single_error_resume_flag)//å­˜åœ¨ä¸€ä¸ªé”™è¯¯æ¢å¤
 	//		{
-	//			if(error->error_oled_row > monitor->single_error_resume_row)//ºóÃæÏÔÊ¾ÏòÇ°ÒÆÅĞ¶Ï
+	//			if(error->error_oled_row > monitor->single_error_resume_row)//åé¢æ˜¾ç¤ºå‘å‰ç§»åˆ¤æ–­
 	//			{
-	//				if(monitor->error_cnt == error->error_oled_row)//µ½´ïoled×îºóÒ»¸öerrorÎ»ÖÃ
+	//				if(monitor->error_cnt == error->error_oled_row)//åˆ°è¾¾oledæœ€åä¸€ä¸ªerrorä½ç½®
 	//				{
-	//					monitor->single_error_resume_flag = 0;//Í£Ö¹ÒÆ¶¯
+	//					monitor->single_error_resume_flag = 0;//åœæ­¢ç§»åŠ¨
 	//				}
 	//				error->error_oled_row -= 1;
 	//			}
@@ -125,11 +125,11 @@ void error_list_display(monitor_t *monitor, error_t *error)
 			
 	//		if(error->display_flag == 0)
 	//		{
-	//			error->error_oled_row = error_row;//±£´æ´íÎóµÄoledĞĞ
+	//			error->error_oled_row = error_row;//ä¿å­˜é”™è¯¯çš„oledè¡Œ
 	//			error_row ++;
 	//			error->display_flag = 1;
 	//		}
-			//²âÊÔpc_caliÔİÊ±¹Ø±Õ
+			//æµ‹è¯•pc_caliæš‚æ—¶å…³é—­
 			if(get_robot_control_mode() != GUI_CALI_MODE)
 			{
 				LED_P6x8Str(0, error_row, (uint8_t *)error->error_msg);
@@ -181,22 +181,22 @@ void monitor_task(void *argument)
 {
 	
 	vTaskDelay(200);
-	//´´½¨Èí¼ş¶¨Ê±Æ÷
+	//åˆ›å»ºè½¯ä»¶å®šæ—¶å™¨
 	Timer_100MS_Task_Handler = xTimerCreate((char *)"Timer_100MS_Task",
 							           (TickType_t)300,//1s
-							           (UBaseType_t)pdTRUE,//ÖÜÆÚ
-							           (void *)1,//¶¨Ê±Æ÷±àºÅ
-							           (TimerCallbackFunction_t)Timer_100MS_Task);//µ÷ÓÃº¯Êı 						
+							           (UBaseType_t)pdTRUE,//å‘¨æœŸ
+							           (void *)1,//å®šæ—¶å™¨ç¼–å·
+							           (TimerCallbackFunction_t)Timer_100MS_Task);//è°ƒç”¨å‡½æ•° 						
 	while(1)
 	{
 		monitor.system_current_time = xTaskGetTickCount();
 		monitor_process(&monitor);
 		
-		if(monitor.error_cnt != 0)//ÓĞÒ»¸öÄ£¿é²»ÔÚÏß ¿¼ÂÇ¹ÒÆğÈÎÎñµ÷¶ÈÆ÷ »òÕß½øÈëÁÙ½çÇø while(1)
+		if(monitor.error_cnt != 0)//æœ‰ä¸€ä¸ªæ¨¡å—ä¸åœ¨çº¿ è€ƒè™‘æŒ‚èµ·ä»»åŠ¡è°ƒåº¦å™¨ æˆ–è€…è¿›å…¥ä¸´ç•ŒåŒº while(1)
 		{
 //			vTaskSuspendAll();
 //			vTaskResume(NULL);
-			monitor.exist_error_flag = 1;//´æÔÚÀëÏßÄ£¿é´íÎó±êÖ¾ÖÃ1£¬Ê¹ÏµÍ³µÄÄ£Ê½±äÎªÍ£Ö¹
+			monitor.exist_error_flag = 1;//å­˜åœ¨ç¦»çº¿æ¨¡å—é”™è¯¯æ ‡å¿—ç½®1ï¼Œä½¿ç³»ç»Ÿçš„æ¨¡å¼å˜ä¸ºåœæ­¢
 			if(task_suspend_flag == 0)
 			{			
 				task_suspend_flag = 1;
@@ -210,9 +210,9 @@ void monitor_task(void *argument)
 			task_suspend_flag = 0;
 			monitor.exist_error_flag = 0;
 			xTimerStop(Timer_100MS_Task_Handler, 0);
-			BUZZER_OFF();//ºÍµ÷ÊÔcaliÌáÊ¾ÓĞ³åÍ»
+			BUZZER_OFF();//å’Œè°ƒè¯•caliæç¤ºæœ‰å†²çª
 		}
-		vTaskDelay(10);                     //10msÒ»´Î
+		vTaskDelay(10);                     //10msä¸€æ¬¡
 	}	
 }
 

@@ -9,26 +9,26 @@
 
 #define SHOOT_TASK_TIME_1MS         (1u)
 
-// #define FRIC_NORMAL_SPPED_VALUE     (300.0f)//Ä¦²ÁÂÖÕı³£ËÙ¶ÈÖµ
+// #define FRIC_NORMAL_SPPED_VALUE     (300.0f)//æ‘©æ“¦è½®æ­£å¸¸é€Ÿåº¦å€¼
 #define FRIC_TEXT_SPEED           (600.0f)
 
-#define FRIC_ALLOW_SPEED_OFFSET     (300.0f)//Ä¦²ÁÂÖËÙ¶ÈÔÊĞíÆ«ÒÆ
-#define TRIGGER_INIT_POSITION_ECD   (2000)//²¦ÂÖµç»ú³õÊ¼Î»ÖÃ
+#define FRIC_ALLOW_SPEED_OFFSET     (300.0f)//æ‘©æ“¦è½®é€Ÿåº¦å…è®¸åç§»
+#define TRIGGER_INIT_POSITION_ECD   (2000)//æ‹¨è½®ç”µæœºåˆå§‹ä½ç½®
 
-#define TRIGGER_GRID          	    (12) //²¦ÅÌ¸ñÊı
-#define SINGLE_BULLET_ECD_INC 	    (24576.0f)//×ª¹ıµÄ±àÂëÖµ 
-#define SINGLE_BULLET_ANGLE_INC     (45.0f)//µ¥·¢²¦ÂÖĞèÒª×ª¹ıµÄ½Ç¶È
-#define TRIGGER_ECD_TO_ANGLE  	    (0.001220703125f)//Á¬Ğø±àÂëÖµ×ªµ½Á¬Ğø½Ç¶È ¿¼ÂÇ¼õËÙ±È36:1
+#define TRIGGER_GRID          	    (12) //æ‹¨ç›˜æ ¼æ•°
+#define SINGLE_BULLET_ECD_INC 	    (24576.0f)//è½¬è¿‡çš„ç¼–ç å€¼ 
+#define SINGLE_BULLET_ANGLE_INC     (45.0f)//å•å‘æ‹¨è½®éœ€è¦è½¬è¿‡çš„è§’åº¦
+#define TRIGGER_ECD_TO_ANGLE  	    (0.001220703125f)//è¿ç»­ç¼–ç å€¼è½¬åˆ°è¿ç»­è§’åº¦ è€ƒè™‘å‡é€Ÿæ¯”36:1
 
-#define SHOOT_TASK_INIT_TIME        (3010)//¿ªÊ¼Ç°ÑÓÊ±Ò»¶ÎÊ±¼ä µÈ´ıÆäËûÄ£¿é½ÓÊÕµ½Êı¾İ
+#define SHOOT_TASK_INIT_TIME        (3010)//å¼€å§‹å‰å»¶æ—¶ä¸€æ®µæ—¶é—´ ç­‰å¾…å…¶ä»–æ¨¡å—æ¥æ”¶åˆ°æ•°æ®
 
-#define PRESS_LONG_TIME             (400)//³¤°´Öµ
+#define PRESS_LONG_TIME             (400)//é•¿æŒ‰å€¼
 #define RC_CH4_MAX                  (660)
 
-#define MAGAZINE_CONTROL            KEY_PRESSED_OFFSET_R         //µ¯²Ö¿ØÖÆ 
-#define SHOOT_CONTROL               KEY_PRESSED_OFFSET_CTRL      //·¢Éä»ú¹¹±£ÏÕ
-#define VISION_BUFF                 KEY_PRESSED_OFFSET_F         //ÊÓ¾õÉä»÷
-#define VISION_BUFF_OVER            KEY_PRESSED_OFFSET_G         //È¡ÏûÊÓ¾õÉä»÷
+#define MAGAZINE_CONTROL            KEY_PRESSED_OFFSET_R         //å¼¹ä»“æ§åˆ¶ 
+#define SHOOT_CONTROL               KEY_PRESSED_OFFSET_CTRL      //å‘å°„æœºæ„ä¿é™©
+#define VISION_BUFF                 KEY_PRESSED_OFFSET_F         //è§†è§‰å°„å‡»
+#define VISION_BUFF_OVER            KEY_PRESSED_OFFSET_G         //å–æ¶ˆè§†è§‰å°„å‡»
 typedef enum
 {
 	SHOOT_STOP = 0,
@@ -38,9 +38,9 @@ typedef enum
 
 typedef enum 
 {
-	FRIC_WHEEL_NORMAL = 0,  //Õı³£µÄ
-	FRIC_WHEEL_INSTABLE,    //Òì³£µÄ
-	FRIC_WHEEL_OFF,					//Î´Æô¶¯
+	FRIC_WHEEL_NORMAL = 0,  //æ­£å¸¸çš„
+	FRIC_WHEEL_INSTABLE,    //å¼‚å¸¸çš„
+	FRIC_WHEEL_OFF,					//æœªå¯åŠ¨
 }fric_mode_e;
 
 typedef struct
@@ -73,17 +73,17 @@ typedef struct
 	float fric2_set;
 	float fric2_fdb;
 	
-	//Êó±ê+Ò£¿ØÆ÷ch4              
-	uint16_t press_left_time;//×ó¼ü°´ÏÂÊ±¼äÍ³¼Æ
+	//é¼ æ ‡+é¥æ§å™¨ch4              
+	uint16_t press_left_time;//å·¦é”®æŒ‰ä¸‹æ—¶é—´ç»Ÿè®¡
 	uint16_t press_right_time;
-	uint8_t mouse_left_long_press_flag;      //×ó³¤°´   
-	uint8_t mouse_right_long_press_flag;     //ÓÒ³¤°´   £¨Á¬·¢Ä£Ê½£©
-	uint8_t mouse_left_single_click_flag;    //×óµ¥»÷   £¨µãÉäÄ£Ê½£©
-	uint8_t mouse_right_single_click_flag;   //ÓÒµ¥»÷ 
+	uint8_t mouse_left_long_press_flag;      //å·¦é•¿æŒ‰   
+	uint8_t mouse_right_long_press_flag;     //å³é•¿æŒ‰   ï¼ˆè¿å‘æ¨¡å¼ï¼‰
+	uint8_t mouse_left_single_click_flag;    //å·¦å•å‡»   ï¼ˆç‚¹å°„æ¨¡å¼ï¼‰
+	uint8_t mouse_right_single_click_flag;   //å³å•å‡» 
 
-	uint8_t magazine_control_flag;      //1:¿ªµ¯²Ö      0:¹Øµ¯²Ö
-	uint8_t shoot_control_flag;         //·¢Éä»ú¹¹±£ÏÕ
-	uint8_t shoot_vision_flag;          //ÊÓ¾õÄ£Ê½
+	uint8_t magazine_control_flag;      //1:å¼€å¼¹ä»“      0:å…³å¼¹ä»“
+	uint8_t shoot_control_flag;         //å‘å°„æœºæ„ä¿é™©
+	uint8_t shoot_vision_flag;          //è§†è§‰æ¨¡å¼
 }shoot_control_data_t;
 
 uint8_t get_shoot_mode(void);

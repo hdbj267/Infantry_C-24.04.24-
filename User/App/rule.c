@@ -43,7 +43,8 @@ void shoot_limit(void)
   * @retval			
   * @note           
   */
-void shoot_heat_limit(void)                   
+void shoot_heat_limit(void)     /*没用上，操作手看ui界面来控制热量就好了，连射的话，应该也用不上，
+																																			太快的话调小射频就好了  */       
 {	
     if (Judge_data.shooter_id1_17mm_cooling_limit > Judge_data.shooter_id1_17mm_cooling_heat )
 	{
@@ -76,7 +77,7 @@ void shoot_heat_limit(void)
 int allow_shoot_speed=500;
 extern vision_control_data_t control_data;
 //int shoot_B;
-void shoot_speed_limit(void)     //18的要小心     *hyj
+void shoot_speed_limit(void)     //18的要小心     *hyj		***
 {
 //	int shoot_B;
 //	switch(Judge_data.shooter_id1_17mm_speed_limit)
@@ -87,19 +88,13 @@ void shoot_speed_limit(void)     //18的要小心     *hyj
 //		case 30:shoot_B=110; break;
 //		default:  break;
 //	}
-	if(control_data.Target_distance<1000)
-		shoot_mag.allow_shoot_speed = (18-30)/15*340+1000;
+	if(control_data.Target_distance<1000)//
+		shoot_mag.allow_shoot_speed = (18-30)/15*340+1000;	//在开自瞄时，近距离应该弹速小一些，不然子弹容易反弹到自己的装甲板
 	else
-	shoot_mag.allow_shoot_speed = (28-30)/15*340+1000;
-	//y=(x-x2)/(x1-x2)*(y1-y2)+y2  (15,660) (30,1000)       
-//	if (Judge_data.bullet_speed <  Judge_data.shooter_id1_17mm_speed_limit && !shoot_mag.Excess_Speed_shoot_flag)
-//	{
-//		shoot_mag.allow_shoot_speed = (Judge_data.shooter_id1_17mm_speed_limit-2) * shoot_K + shoot_B;
-//	}
-//	else 
-//	{
-//		shoot_mag.allow_shoot_speed = (Judge_data.shooter_id1_17mm_speed_limit - 2) * shoot_K + shoot_B;
-//	}
+	shoot_mag.allow_shoot_speed = (28-30)/15*340+1000;//23届弹速无限制，30m/s都可以，后面把这个自变量换成裁判系统限制的最大弹速
+	//y=(x-x2)/(x1-x2)*(y1-y2)+y2  (15,660) (30,1000) 两点式，自变量是弹速，结果是摩擦轮速度      
+
+	
 	//加最值限制
 	if (shoot_mag.allow_shoot_speed > 1000)
 	{

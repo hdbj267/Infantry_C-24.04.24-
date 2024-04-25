@@ -2,10 +2,10 @@
  * @Copyright(C),
  * @FileName:.c
  * @Author: HongYuJia  
- * @Teammate£º
+ * @Teammateï¼š
  * @Version: V3.0
  * @Date:2020.4.13
- * @Description: ¹ØÓÚÔÆÌ¨µÄ¿ØÖÆ
+ * @Description: å…³äºäº‘å°çš„æ§åˆ¶
  * @Note:       
  * @Others: 
 **/
@@ -58,8 +58,8 @@ extern shoot_control_data_t shoot_control_data;
   * @retval			
   * @note           
   */
-//»úÆ÷ÈË¹¤×÷Ä£Ê½
-void set_robot_control_mode(robot_control_mode_e mode)
+//æœºå™¨äººå·¥ä½œæ¨¡å¼ 
+void set_robot_control_mode(robot_control_mode_e mode)	//***
 {
 	robot_control_mode = mode;
 }
@@ -79,7 +79,7 @@ void robot_control_mode_update(RC_ctrl_t *rc_s)
 		case RC_SW_DOWN:
 			set_robot_control_mode(GUI_CALI_MODE);break;
 	}
-//	 if(monitor.exist_error_flag == 1)//·¢ÉúÑÏÖØ´íÎóÊ±£¬²»ÊÜÒ£¿ØÖ¸»ÓÇ¿ĞĞ×ªÎªµ÷ÊÔÄ£Ê½
+//	 if(monitor.exist_error_flag == 1)//å‘ç”Ÿä¸¥é‡é”™è¯¯æ—¶ï¼Œä¸å—é¥æ§æŒ‡æŒ¥å¼ºè¡Œè½¬ä¸ºè°ƒè¯•æ¨¡å¼
 //	 {
 //	 	set_robot_control_mode(GUI_CALI_MODE);
 //	 }
@@ -106,15 +106,15 @@ uint8_t get_robot_work_mode(void)
 {
 	return robot_work_mode;
 }
-void robot_work_mode_update(RC_ctrl_t *rc_s)
+void robot_work_mode_update(RC_ctrl_t *rc_s)  // **
 {
 	//work mode
 	if(gimbal_position_init_finish_flag == 0 && get_robot_control_mode() != GUI_CALI_MODE)
 	{
-		set_robot_work_mode(ROBOT_INIT_MODE);	//³õÊ¼»¯	
+		set_robot_work_mode(ROBOT_INIT_MODE);	//åˆå§‹åŒ–	
 		gimbal_position_init_finish_flag = 1;
 	}
-	else if(get_robot_control_mode() == REMOTE_MODE)	//Ò£¿ØÆ÷¿ØÖÆ¹¤×÷Ä£Ê½
+	else if(get_robot_control_mode() == REMOTE_MODE)	//é¥æ§å™¨æ§åˆ¶å·¥ä½œæ¨¡å¼
 	{
 		switch(rc_s->rc.s1)
 		{
@@ -126,7 +126,7 @@ void robot_work_mode_update(RC_ctrl_t *rc_s)
 				set_robot_work_mode(ROBOT_COMMON_MODE);break;
 		}
 	}
-	else if(get_robot_control_mode() == KEY_MOUSE_MODE)	//¼üÊó¿ØÖÆ¹¤×÷Ä£Ê½EQV
+	else if(get_robot_control_mode() == KEY_MOUSE_MODE)	//é”®é¼ æ§åˆ¶å·¥ä½œæ¨¡å¼EQV
 	{
 		if(rc_s->key.v & ROBOT_ROTATE_STOP_MODE_KEY)
 		{
@@ -144,7 +144,7 @@ void robot_work_mode_update(RC_ctrl_t *rc_s)
 	}
 	else if(get_robot_control_mode() == GUI_CALI_MODE)
 	{
-		set_robot_work_mode(ROBOT_CALI_MODE);	//µ÷ÊÔÄ£Ê½
+		set_robot_work_mode(ROBOT_CALI_MODE);	//è°ƒè¯•æ¨¡å¼
 		gimbal_position_init_finish_flag = 0;
 	}	
 	
@@ -164,7 +164,7 @@ void robot_work_mode_update(RC_ctrl_t *rc_s)
   * @retval			
   * @note           
   */
-//ÔÆÌ¨¹¤×÷Ä£Ê½
+//äº‘å°å·¥ä½œæ¨¡å¼
 void set_gimbal_work_mode(gimbal_work_mode_e mode)
 {
 	gimbal_work_mode = mode;
@@ -194,12 +194,12 @@ void gimbal_work_mode_update(RC_ctrl_t *rc_s, gimbal_control_data_t *gimbal_cont
 	
 	switch(get_gimbal_work_mode())
 	{
-		case GIMBAL_RELATIVE_ANGLE_MODE:         //±àÂëÖµ   *hyj
+		case GIMBAL_RELATIVE_ANGLE_MODE:         //ç¼–ç å€¼   *hyj
 		{
 			gimbal_control_data->yaw_motor_fdb_mode = GIMBAL_MOTOR_ENCONDE;
 			gimbal_control_data->pitch_motor_fdb_mode = GIMBAL_MOTOR_ENCONDE;
 		}break;
-		case GIMBAL_ABSOLUTE_ANGLE_MODE:         //ÍÓÂİÒÇ   *hyj
+		case GIMBAL_ABSOLUTE_ANGLE_MODE:         //é™€èºä»ª   *hyj
 		{
 			gimbal_control_data->yaw_motor_fdb_mode = GIMBAL_MOTOR_GYRO;
 			gimbal_control_data->pitch_motor_fdb_mode = GIMBAL_MOTOR_GYRO;
@@ -257,8 +257,8 @@ float vision_K = 1;
 int ROBOT_ROTATE_MOTION_MODE_flag;
 
 
-/*Ä¿Ç°²½±øÓÃµÄÊÇÈı´®¼¶pid¡£Êµ¼Ê²âÊÔÊ±·¢ÏÖ£¬ËäÈ»¿ØÖÆµÃ±È½ÏÎÈ¶¨£¨²»ÔõÃ´¶¶£©£¬µ«ÊÇÏìÓ¦Ì«Âı£¬
-¿¹¸ÉÈÅÄÜÁ¦Ò²²»ĞĞ£¬¶ÔÃæÒ»¿ªĞ¡ÍÓÂİ¾Í¸ú²»ÉÏÁË£¬»¹ÊÇµÃ¸Ä³ÉºÍÉÚ±øÒ»ÑùµÄË«´®¼¶pid*/
+/*ç›®å‰æ­¥å…µç”¨çš„æ˜¯ä¸‰ä¸²çº§pidã€‚å®é™…æµ‹è¯•æ—¶å‘ç°ï¼Œè™½ç„¶æ§åˆ¶å¾—æ¯”è¾ƒç¨³å®šï¼ˆä¸æ€ä¹ˆæŠ–ï¼‰ï¼Œä½†æ˜¯å“åº”å¤ªæ…¢ï¼Œ
+æŠ—å¹²æ‰°èƒ½åŠ›ä¹Ÿä¸è¡Œï¼Œå¯¹é¢ä¸€å¼€å°é™€èºå°±è·Ÿä¸ä¸Šäº†ï¼Œè¿˜æ˜¯å¾—æ”¹æˆå’Œå“¨å…µä¸€æ ·çš„åŒä¸²çº§pid*/
 
 pid_t delta_yaw= 
 {
@@ -307,9 +307,9 @@ int8_t vision_flag=-1;
 
 void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 							   robot_control_mode_e robot_control_mode,							   
-							   vision_control_data_t control_data)
+							   vision_control_data_t control_data)	//*****
 {	
-/*¸ù¾İyawÖáµÄÔË¶¯ÅĞ¶Ï¶Ô·½ÊÇ·ñ¿ªÆôĞ¡ÍÓÂİ£¬Ğ´Õâ¸öÊÇÎªÁË×ö×ÔÃé²¹³¥ÓÃ£¬µ±Ê±Ê±¼ä½ôÃ»ÓÃÉÏ*/
+/*æ ¹æ®yawè½´çš„è¿åŠ¨åˆ¤æ–­å¯¹æ–¹æ˜¯å¦å¼€å¯å°é™€èºï¼Œå†™è¿™ä¸ªæ˜¯ä¸ºäº†åšè‡ªç„è¡¥å¿ç”¨ï¼Œå½“æ—¶æ—¶é—´ç´§æ²¡ç”¨ä¸Š*/
 	switch(rotate_deduce)
 	{
 		case 0:
@@ -338,8 +338,8 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 	left_num--;
 	}
 	
-		/*ÏÂÃæÕâÒ»²¿·ÖµÄ´úÂëÊÇ³¢ÊÔ½øĞĞ×öÊÓ¾õÔ¤²âµÄ²¿·Ö£¬»ù±¾Âß¼­£ºÓÉÓÚ×ÔÃéÊ±£¬ÔÆÌ¨µÄÔË¶¯»ù±¾ÊÇºÍµĞ·½×°¼×°åµÄÔË¶¯°ó¶¨µÄ
-	ËùÒÔ¶ÔÔÆÌ¨µÄyawÖá½ÇËÙ¶È½øĞĞ³¤Ê±¼äµÄÈ¡Æ½¾ù£¬µÃµ½±È½ÏÆ½»¬µÄ½ÇËÙ¶È£¬¸Ã²¿·ÖÄ¿Ç°Î´Êµ¼ù£¬Ö»ÊÇĞ´ÁË¸ö½Ó¿Ú*/
+		/*ä¸‹é¢è¿™ä¸€éƒ¨åˆ†çš„ä»£ç æ˜¯å°è¯•è¿›è¡Œåšè§†è§‰é¢„æµ‹çš„éƒ¨åˆ†ï¼ŒåŸºæœ¬é€»è¾‘ï¼šç”±äºè‡ªç„æ—¶ï¼Œäº‘å°çš„è¿åŠ¨åŸºæœ¬æ˜¯å’Œæ•Œæ–¹è£…ç”²æ¿çš„è¿åŠ¨ç»‘å®šçš„
+	æ‰€ä»¥å¯¹äº‘å°çš„yawè½´è§’é€Ÿåº¦è¿›è¡Œé•¿æ—¶é—´çš„å–å¹³å‡ï¼Œå¾—åˆ°æ¯”è¾ƒå¹³æ»‘çš„è§’é€Ÿåº¦ï¼Œè¯¥éƒ¨åˆ†ç›®å‰æœªå®è·µï¼Œåªæ˜¯å†™äº†ä¸ªæ¥å£*/
 	gyroy_aver=slidingWindowFilter(abs_fun(gimbal_control_data->gimbal_INS->gyro_y));
 	if(delta_yaw_dev_flag)
 	delta_yaw_dev=gyroy_aver*numnum;
@@ -352,7 +352,7 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 	if(gimbal_control_data->pitch_motor_fdb_mode == GIMBAL_MOTOR_GYRO)//mpu
 	{
 		
-	//f°´¼ü×ÔÃé£¬°´Ò»´Î¿ª£¬°´Ò»´Î¹Ø	
+	//fæŒ‰é”®è‡ªç„ï¼ŒæŒ‰ä¸€æ¬¡å¼€ï¼ŒæŒ‰ä¸€æ¬¡å…³	
 			switch(key_trigger_num)
 	{
 		case 0:
@@ -369,10 +369,10 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 		default: break;
 	}
 
-//²½±øµÄ×ÔÃé´òµÃ±È½Ï×¼£¬	delta_yaw_devºÍdelta_pitch_devÊÇ×öµĞ·½ÒÆ¶¯²¹³¥ÓÃµÄ£¬Èç¹ûÊÓ¾õºóÃæÔ¤²â×öµÃ±È½ÏºÃÓ¦¸Ã¾Í²»ĞèÒªÁË
+//æ­¥å…µçš„è‡ªç„æ‰“å¾—æ¯”è¾ƒå‡†ï¼Œ	delta_yaw_devå’Œdelta_pitch_devæ˜¯åšæ•Œæ–¹ç§»åŠ¨è¡¥å¿ç”¨çš„ï¼Œå¦‚æœè§†è§‰åé¢é¢„æµ‹åšå¾—æ¯”è¾ƒå¥½åº”è¯¥å°±ä¸éœ€è¦äº†
 		if(robot_control_mode == KEY_MOUSE_MODE ) //KEY_MOUSE_MODE
 		{	
-			if(vision_flag==1)     //°´¼üÊÓ¾õ×ÔÃé     *hyj  
+			if(vision_flag==1)     //æŒ‰é”®è§†è§‰è‡ªç„     *hyj  
 			{
 				if(control_data.recog_flag==1 )
 			{
@@ -392,7 +392,7 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 					delta_pitch.fdb=-control_data.pitch_dev-delta_pitch_dev;
 				delta_pitch.Calc(&delta_pitch);
 				gimbal_control_data->gimbal_pitch_set += delta_pitch.output;
-				control_data.recog_flag=0;//ÊÓ¾õ±êÖ¾Î»ÇåÁã£¬·ÀÖ¹ÖØ¸´¼ÆËãpid
+				control_data.recog_flag=0;//è§†è§‰æ ‡å¿—ä½æ¸…é›¶ï¼Œé˜²æ­¢é‡å¤è®¡ç®—pid
 			}
 			else
 			{
@@ -424,10 +424,10 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 			}
 		}
 		
-		else if(robot_control_mode != KEY_MOUSE_MODE) //REMOTE_MODE		µ÷ÊÔÊÓ¾õÓÃ
+		else if(robot_control_mode != KEY_MOUSE_MODE) //REMOTE_MODE		è°ƒè¯•è§†è§‰ç”¨
 		 //else if(robot_control_mode == REMOTE_MODE ) //REMOTE_MODE
 		{
-			//ÊÓ¾õ´¦Àí     *hyj
+			//è§†è§‰å¤„ç†     *hyj
 			if(control_data.recog_flag==1 )
 			{
 				//delta_pitch_dev=-(control_data.Target_distance-5000.0)/4000.0*(delta_pitch_dev_y1-delta_pitch_dev_y2)+delta_pitch_dev_y2;//y=(x-x2)/(x1-x2)*(y1-y2)+y2  (1000,-1) (5000,3)
@@ -464,7 +464,7 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 		gimbal_control_data->gimbal_yaw_fdb = gimbal_control_data->gimbal_INS->yaw_angle;
 		gimbal_control_data->gimbal_pitch_fdb = gimbal_control_data->gimbal_INS->roll_angle;		
 	}
-	else if(gimbal_control_data->pitch_motor_fdb_mode == GIMBAL_MOTOR_ENCONDE)//³õÊ¼»¯Ê±µÄ±àÂëÄ£Ê½ set ¿ÉĞŞ¸Ä
+	else if(gimbal_control_data->pitch_motor_fdb_mode == GIMBAL_MOTOR_ENCONDE)//åˆå§‹åŒ–æ—¶çš„ç¼–ç æ¨¡å¼ set å¯ä¿®æ”¹
 	{
 		//yaw
 		gimbal_control_data->gimbal_yaw_set =  gimbal_control_data->gimbal_INS->yaw_angle\
@@ -482,7 +482,7 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 	{
 		gimbal_control_data->gimbal_pitch_set=-80;
 	}
-	else if(gimbal_control_data->gimbal_pitch_set<-101)//×ÔÃéµÄ»°Í·¾Í²»µÍÌ«ÏÂÁË£¬·ÀÖ¹¿ªĞ¡ÍÓÂİÊ±´òµ½×Ô¼ºµÆÌõ
+	else if(gimbal_control_data->gimbal_pitch_set<-101)//è‡ªç„çš„è¯å¤´å°±ä¸ä½å¤ªä¸‹äº†ï¼Œé˜²æ­¢å¼€å°é™€èºæ—¶æ‰“åˆ°è‡ªå·±ç¯æ¡
 		gimbal_control_data->gimbal_pitch_set=-101;
 }
 	else
@@ -491,7 +491,7 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
 	{
 		gimbal_control_data->gimbal_pitch_set=-80;
 	}
-	else if(gimbal_control_data->gimbal_pitch_set<-117)//²»¿ª×ÔÃé×îµÍ½Ç¶È¿ª´óµã£¬ÀûÓÚ´ò½üÕ½
+	else if(gimbal_control_data->gimbal_pitch_set<-117)//ä¸å¼€è‡ªç„æœ€ä½è§’åº¦å¼€å¤§ç‚¹ï¼Œåˆ©äºæ‰“è¿‘æˆ˜
 		gimbal_control_data->gimbal_pitch_set=-117;
 	}
 }
@@ -504,26 +504,26 @@ void gimbal_set_and_fdb_update(gimbal_control_data_t *gimbal_control_data,
   * @retval			
   * @note           
   */
-void gimbal_cascade_pid_calculate(gimbal_pid_t *gimbal_pid,       \
+void gimbal_cascade_pid_calculate(gimbal_pid_t *gimbal_pid,       //****
 					              gimbal_control_data_t *gimbal_control_data)
 {
 //	if(!vision_flag)
 //	{
-	//yawÖá½Ç¶Èpid¼ÆËã
+	//yawè½´è§’åº¦pidè®¡ç®—
 	gimbal_pid->yaw_pid.position_pid.set = gimbal_control_data->gimbal_yaw_set;
 	gimbal_pid->yaw_pid.position_pid.fdb = gimbal_control_data->gimbal_yaw_fdb;
 	gimbal_pid->yaw_pid.position_pid.Calc(&gimbal_pid->yaw_pid.position_pid);
 	
-	//yawÖáËÙ¶Èpid¼ÆËã
+	//yawè½´é€Ÿåº¦pidè®¡ç®—
 	gimbal_pid->yaw_pid.speed_pid.set = gimbal_pid->yaw_pid.position_pid.output;
 	gimbal_pid->yaw_pid.speed_pid.fdb = -gimbal_control_data->gimbal_INS->gyro_y;
 	gimbal_pid->yaw_pid.speed_pid.Calc(&gimbal_pid->yaw_pid.speed_pid);
 	
-	//pitchÖá½Ç¶Èpid¼ÆËã
+	//pitchè½´è§’åº¦pidè®¡ç®—
 	gimbal_pid->pitch_pid.position_pid.set = -gimbal_control_data->gimbal_pitch_set;
 	gimbal_pid->pitch_pid.position_pid.fdb = -gimbal_control_data->gimbal_pitch_fdb; 
 	gimbal_pid->pitch_pid.position_pid.Calc(&gimbal_pid->pitch_pid.position_pid);
-	//pitchÖáËÙ¶Èpid¼ÆËã
+	//pitchè½´é€Ÿåº¦pidè®¡ç®—
 	gimbal_pid->pitch_pid.speed_pid.set = gimbal_pid->pitch_pid.position_pid.output;
 	gimbal_pid->pitch_pid.speed_pid.fdb = -gimbal_control_data->gimbal_INS->gyro_x;
 	gimbal_pid->pitch_pid.speed_pid.Calc(&gimbal_pid->pitch_pid.speed_pid);	
@@ -536,15 +536,15 @@ void gimbal_cascade_pid_calculate(gimbal_pid_t *gimbal_pid,       \
   * @retval			
   * @note           
   */
-void gimbal_control_loop(gimbal_pid_t *gimbal_pid,       \
+void gimbal_control_loop(gimbal_pid_t *gimbal_pid,       //****
 					     gimbal_control_data_t *gimbal_control_data)
 {
 
-	//ÕâÀï¸ÄÎªÁËÕıÖµ
-	gimbal_control_data->given_current.yaw_motor = gimbal_pid->yaw_pid.speed_pid.output;//g6020·´Ïò°²×°ĞèÒª¼Ó¸ººÅ
+	//è¿™é‡Œæ”¹ä¸ºäº†æ­£å€¼
+	gimbal_control_data->given_current.yaw_motor = gimbal_pid->yaw_pid.speed_pid.output;//g6020åå‘å®‰è£…éœ€è¦åŠ è´Ÿå·
 	gimbal_control_data->given_current.pitch_motor = gimbal_pid->pitch_pid.speed_pid.output;
 
-	//¿´ÁËÏÂµ×ÅÌ£¬Ã»½ÓÊÜCAN2_GIMBAL_STD_ID
+	//çœ‹äº†ä¸‹åº•ç›˜ï¼Œæ²¡æ¥å—CAN2_GIMBAL_STD_ID
 	if(get_robot_control_mode() == GUI_CALI_MODE )//if(get_gimbal_work_mode() == GIMBAL_CALI_MODE)
 	{
 		set_gimbal_stop();
@@ -609,7 +609,7 @@ void gimbal_init(gimbal_pid_t *gimbal_pid,   \
 
 }
 /**
-  * @brief        ÔËĞĞÊ±¹ÒÆğGUIÈÎÎñ
+  * @brief        è¿è¡Œæ—¶æŒ‚èµ·GUIä»»åŠ¡
   * @author         
   * @param[in]      
   * @retval			
@@ -622,8 +622,8 @@ void gimbal_init(gimbal_pid_t *gimbal_pid,   \
   * @author         
   * @param[in]      
   * @retval			
-  * @note  		1.gimbal_task ÅÜ²»ÁËoled³ÌĞò md²»ÖªµÀÊ²Ã´ÎÊÌâ  
-				2.whileÑ­»·µÄÇ°ÃæÁ½¸öº¯ÊıÏûºÄ4%(ÆäÖĞµÚÒ»¸ö0.3%) Õû¸öwhileÏûºÄ15%
+  * @note  		1.gimbal_task è·‘ä¸äº†oledç¨‹åº mdä¸çŸ¥é“ä»€ä¹ˆé—®é¢˜  
+				2.whileå¾ªç¯çš„å‰é¢ä¸¤ä¸ªå‡½æ•°æ¶ˆè€—4%(å…¶ä¸­ç¬¬ä¸€ä¸ª0.3%) æ•´ä¸ªwhileæ¶ˆè€—15%
   */
 void gimbal_task(void *argument)
 {
@@ -634,12 +634,12 @@ void gimbal_task(void *argument)
 	while(1)
 	{
 		
-		current_time = xTaskGetTickCount();                         //µ±Ç°ÏµÍ³Ê±¼ä       *hyj
-		send_gyro_data_to_chassis();																//·¢ËÍÍÓÂİÒÇÊı¾İ¸øµ×ÅÌ£¨µ×ÅÌÊµÏÖ¸úËæÔÆÌ¨£©
-		gimbal_work_mode_update(&rc_ctrl_data, &gimbal_control_data);//¸üĞÂÔÆÌ¨×´Ì¬
-		gimbal_set_and_fdb_update(&gimbal_control_data, robot_control_mode, control_data );//set fdbÊı¾İ¸üĞÂ
-		gimbal_cascade_pid_calculate(&gimbal_pid, &gimbal_control_data);//´®¼¶pid¼ÆËã
-		gimbal_control_loop(&gimbal_pid, &gimbal_control_data);//¿ØÖÆÑ­»·
-		vTaskDelayUntil(&current_time, GIMBAL_TASK_TIME_1MS);       //1msÒ»´Î         *hyj     
+		current_time = xTaskGetTickCount();                         //å½“å‰ç³»ç»Ÿæ—¶é—´       *hyj
+		send_gyro_data_to_chassis();																//å‘é€é™€èºä»ªæ•°æ®ç»™åº•ç›˜ï¼ˆåº•ç›˜å®ç°è·Ÿéšäº‘å°ï¼‰
+		gimbal_work_mode_update(&rc_ctrl_data, &gimbal_control_data);//æ›´æ–°äº‘å°çŠ¶æ€
+		gimbal_set_and_fdb_update(&gimbal_control_data, robot_control_mode, control_data );//set fdbæ•°æ®æ›´æ–°
+		gimbal_cascade_pid_calculate(&gimbal_pid, &gimbal_control_data);//ä¸²çº§pidè®¡ç®—
+		gimbal_control_loop(&gimbal_pid, &gimbal_control_data);//æ§åˆ¶å¾ªç¯
+		vTaskDelayUntil(&current_time, GIMBAL_TASK_TIME_1MS);       //1msä¸€æ¬¡         *hyj     
 	}	
 }

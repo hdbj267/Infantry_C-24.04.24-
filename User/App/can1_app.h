@@ -5,25 +5,25 @@
 #include "stm32f4xx_hal.h"
 #include "struct_typedef.h"
 
-#define RATE_BUF_SIZE 6  //µç»úËÙ¶È»¬¶¯ÂË²¨´°¿Ú´óĞ¡
+#define RATE_BUF_SIZE 6  //ç”µæœºé€Ÿåº¦æ»‘åŠ¨æ»¤æ³¢çª—å£å¤§å°
 
 typedef struct 
 {
-	struct //ÄäÃû½á¹¹Ìå¶¨Òå½á¹¹Ìå±äÁ¿    *hyj
+	struct //åŒ¿åç»“æ„ä½“å®šä¹‰ç»“æ„ä½“å˜é‡    *hyj
 	{                               
-		int32_t raw_value;          //±àÂëÖµ
-		int32_t last_raw_value;     //ÉÏÒ»±àÂëÖµ
-		int32_t diff;               //Ç°ºó±àÂëÎó²î
-		int32_t round_cnt;          //È¦Êı
+		int32_t raw_value;          //ç¼–ç å€¼
+		int32_t last_raw_value;     //ä¸Šä¸€ç¼–ç å€¼
+		int32_t diff;               //å‰åç¼–ç è¯¯å·®
+		int32_t round_cnt;          //åœˆæ•°
 		int32_t ecd_raw_rate;       //
-		int32_t ecd_bias;           //³õÊ¼Î»ÖÃ
-		int32_t filter_rate;        //½ÇËÙ¶ÈÆ½¾ùÖµ
-		uint8_t start_flag;         //³õÊ¼Î»ÖÃ±êÖ¾
+		int32_t ecd_bias;           //åˆå§‹ä½ç½®
+		int32_t filter_rate;        //è§’é€Ÿåº¦å¹³å‡å€¼
+		uint8_t start_flag;         //åˆå§‹ä½ç½®æ ‡å¿—
 		int32_t buf_count;          
 		int32_t filter_rate_sum;    //
 		int32_t rate_buf[RATE_BUF_SIZE];
-		float ecd_angle;            //½Ç¶È  
-	}encoder;//¶¨ÒåÒ»¸öÃûÎªEncoderµÄ½á¹¹Ìå       
+		float ecd_angle;            //è§’åº¦  
+	}encoder;//å®šä¹‰ä¸€ä¸ªåä¸ºEncoderçš„ç»“æ„ä½“       
 	
 	int32_t speed_rpm;
 	int32_t given_current;
@@ -32,7 +32,7 @@ typedef struct
 
 typedef enum
 {
-	CAN1_SHOOT_STD_ID = 0x200,//ÍòÏò½Ú
+	CAN1_SHOOT_STD_ID = 0x200,//ä¸‡å‘èŠ‚
 
 	CAN1_TRIGGER_MOTOR_STD_ID = 0x203,
 	CAN1_FRICTION_MOTOR1_STD_ID = 0x201,

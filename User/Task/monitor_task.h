@@ -6,17 +6,17 @@
 
 typedef struct
 {
-	uint32_t time;            //Ä£¿éË¢ĞÂÊ±µÄÏµÍ³Ê±¼ä
-	uint8_t enable_flag;      //ÊÇ·ñÊ¹ÄÜ¼à¿Ø±êÖ¾Î»
-	uint8_t *error_msg;       //oled´òÓ¡µÄ´íÎóĞÅÏ¢
-	uint8_t lost_flag;        //ÀëÏß±êÖ¾Î»
-	uint16_t timeout;         //ÔËĞĞ³¬Ê±Ê±¼ä
+	uint32_t time;            //æ¨¡å—åˆ·æ–°æ—¶çš„ç³»ç»Ÿæ—¶é—´
+	uint8_t enable_flag;      //æ˜¯å¦ä½¿èƒ½ç›‘æ§æ ‡å¿—ä½
+	uint8_t *error_msg;       //oledæ‰“å°çš„é”™è¯¯ä¿¡æ¯
+	uint8_t lost_flag;        //ç¦»çº¿æ ‡å¿—ä½
+	uint16_t timeout;         //è¿è¡Œè¶…æ—¶æ—¶é—´
 
-//	uint16_t error_oled_row;  //´íÎóÏÔÊ¾ÔÙoledÉÏµÄĞĞ
+//	uint16_t error_oled_row;  //é”™è¯¯æ˜¾ç¤ºå†oledä¸Šçš„è¡Œ
 //	uint8_t display_flag;
 }error_t;
 
-typedef struct //ĞèÒª¼à¿ØµÄÄ£¿é
+typedef struct //éœ€è¦ç›‘æ§çš„æ¨¡å—
 {
 	error_t remote;
 	error_t yaw_motor;
@@ -25,8 +25,8 @@ typedef struct //ĞèÒª¼à¿ØµÄÄ£¿é
 	error_t fric1_motor;
 	error_t fric2_motor;
 	
-	uint32_t system_current_time;//ÏµÍ³µ±Ç°Ê±¼ä
-	uint16_t error_cnt;//´íÎóÊıÁ¿
+	uint32_t system_current_time;//ç³»ç»Ÿå½“å‰æ—¶é—´
+	uint16_t error_cnt;//é”™è¯¯æ•°é‡
 	uint8_t exist_error_flag;
 
 }monitor_t;

@@ -2,12 +2,12 @@
 // * @Copyright(C),
 // * @FileName:.c
 // * @Author: HongYuJia  
-// * @Teammate£º
+// * @Teammateï¼š
 // * @Version: V3.0
 // * @Date:2020.4.13
-// * @Description: »úÆ÷ÈË¸÷¸ö²ÎÊýµÄÐ£Õý£¬ÅäºÏÀ¶ÑÀ´®¿Ú½øÐÐÊý¾Ýµ÷²Î
-// * 				£¨Ä¿Ç°C°å4pinµÄ´®¿Ú±»Ð¡µçÄÔÕ¼ÓÃ£¬Î´Æô¶¯¸ÃÈÎÎñ
-// * 				 ºóÆÚ¿ÉÒÔ½«Ð¡µçÄÔµÄ½»»¥·ÅÔÚ3pinÉÏ£¬ÀûÓÃºÃ×ÊÔ´£©
+// * @Description: æœºå™¨äººå„ä¸ªå‚æ•°çš„æ ¡æ­£ï¼Œé…åˆè“ç‰™ä¸²å£è¿›è¡Œæ•°æ®è°ƒå‚
+// * 				ï¼ˆç›®å‰Cæ¿4pinçš„ä¸²å£è¢«å°ç”µè„‘å ç”¨ï¼Œæœªå¯åŠ¨è¯¥ä»»åŠ¡
+// * 				 åŽæœŸå¯ä»¥å°†å°ç”µè„‘çš„äº¤äº’æ”¾åœ¨3pinä¸Šï¼Œåˆ©ç”¨å¥½èµ„æºï¼‰
 // * @Note:       
 // * @Others: 
 //**/
@@ -98,7 +98,7 @@
 //  * @author         
 //  * @param[in] 
 //  * @retval	
-//  * @note       »ñÈ¡pc¶Ë·¢ËÍµÄµ÷Ê½Êý¾Ý£¬ÖÐ¶Ï´¦Àí·ÀÖ¹Êý¾Ý¸²¸Ç
+//  * @note       èŽ·å–pcç«¯å‘é€çš„è°ƒå¼æ•°æ®ï¼Œä¸­æ–­å¤„ç†é˜²æ­¢æ•°æ®è¦†ç›–
 //  */
 //void get_pc_cali_data(pc_cali_t *pc_cali, uint8_t *usart1_data)
 //{
@@ -106,7 +106,7 @@
 //	{
 //		return;
 //	}
-//	pc_cali->check_top_byte = usart1_data[0]; //»ñÈ¡Ö¡Í·Î²Ð§ÑéÎ»
+//	pc_cali->check_top_byte = usart1_data[0]; //èŽ·å–å¸§å¤´å°¾æ•ˆéªŒä½
 //	pc_cali->check_bottom_byte = usart1_data[29];
 //	
 //	pc_cali->pid_type_data = usart1_data[1];
@@ -119,7 +119,7 @@
 //			get_usart_data_to_array(&pc_cali->cali_i_array[0], &usart1_data[6]);
 //			get_usart_data_to_array(&pc_cali->cali_d_array[0], &usart1_data[10]);			
 //		}
-//		else //×Ô¶¨Òå²ÎÊý
+//		else //è‡ªå®šä¹‰å‚æ•°
 //		{  
 //			get_usart_data_to_array(&pc_cali->cali_param1_array[0], &usart1_data[2]);
 //			get_usart_data_to_array(&pc_cali->cali_param2_array[0], &usart1_data[6]);
@@ -132,7 +132,7 @@
 //	}
 //	else
 //	{
-//		//memset(usart1_data, 0, CALI_DATA_PACKAGE_SIZE * sizeof(uint8_t));//ÆôÓÃ»á·¢ÉúÊý¾Ý´íÎó£¬´ý
+//		//memset(usart1_data, 0, CALI_DATA_PACKAGE_SIZE * sizeof(uint8_t));//å¯ç”¨ä¼šå‘ç”Ÿæ•°æ®é”™è¯¯ï¼Œå¾…
 //	}
 //}
 ///**
@@ -183,11 +183,11 @@
 //		case FRIC2_PID:
 //			get_cali_pid(pc_cali, &cali_shoot_pid.fric2_pid);
 //		break;
-//		case CM_PID: //cmËÄ¸öµç»ú
+//		case CM_PID: //cmå››ä¸ªç”µæœº
 //			get_cali_pid(pc_cali, &cali_chassis_pid.cm_pid);
 //			set_chassis_CM_pid_data_to_chassis();
 //		break;
-//		case ROTATE_PID://¹ö¶¯·½Ïò
+//		case ROTATE_PID://æ»šåŠ¨æ–¹å‘
 //			get_cali_pid(pc_cali, &cali_chassis_pid.rotate_pid);
 //			set_chassis_rotate_pid_data_to_chassis();
 //		break;
@@ -202,7 +202,7 @@
 //	}
 //}
 ///**
-//  * @brief         4×Ö½Úunsigned char ×ª»»Îªfloat
+//  * @brief         4å­—èŠ‚unsigned char è½¬æ¢ä¸ºfloat
 //  * @author         
 //  * @param[in] 
 //  * @retval	
@@ -272,7 +272,7 @@
 //	get_cali_pid_data(&shoot_pid->fric_2_pid, &cali_shoot_pid->fric2_pid);
 //}
 ///**
-//  * @brief         ·äÃùÆ÷ÌáÊ¾º¯Êý 
+//  * @brief         èœ‚é¸£å™¨æç¤ºå‡½æ•° 
 //  * @author         
 //  * @param[in] 
 //  * @retval	
@@ -314,14 +314,14 @@
 //{
 //	// vcan_sendware((uint8_t *)Virtual_var, sizeof(Virtual_var));
 //    #define CMD_WARE     3
-//    uint8_t cmdf[2] = {CMD_WARE, ~CMD_WARE};    //´®¿Úµ÷ÊÔ Ê¹ÓÃµÄÇ°ÃüÁî
-//    uint8_t cmdr[2] = {~CMD_WARE, CMD_WARE};    //´®¿Úµ÷ÊÔ Ê¹ÓÃµÄºóÃüÁî
+//    uint8_t cmdf[2] = {CMD_WARE, ~CMD_WARE};    //ä¸²å£è°ƒè¯• ä½¿ç”¨çš„å‰å‘½ä»¤
+//    uint8_t cmdr[2] = {~CMD_WARE, CMD_WARE};    //ä¸²å£è°ƒè¯• ä½¿ç”¨çš„åŽå‘½ä»¤
 //	usart1_send_data(cmdf);
 //	usart1_send_data(wareaddr);
 //	usart1_send_data(cmdr);
-//    // uart_putbuff(VCAN_PORT, cmdf, sizeof(cmdf));    //ÏÈ·¢ËÍÇ°ÃüÁî
-//    // uart_putbuff(VCAN_PORT, (uint8_t *)wareaddr, waresize);    //·¢ËÍÊý¾Ý
-//    // uart_putbuff(VCAN_PORT, cmdr, sizeof(cmdr));    //·¢ËÍºóÃüÁî
+//    // uart_putbuff(VCAN_PORT, cmdf, sizeof(cmdf));    //å…ˆå‘é€å‰å‘½ä»¤
+//    // uart_putbuff(VCAN_PORT, (uint8_t *)wareaddr, waresize);    //å‘é€æ•°æ®
+//    // uart_putbuff(VCAN_PORT, cmdr, sizeof(cmdr));    //å‘é€åŽå‘½ä»¤
 //}
 //uint8_t Virtual_var[6];
 
@@ -339,10 +339,10 @@
 //    {
 //		// get_pc_cali_data(&pc_cali, usart1_cali_data);
 //	
-//		if(pc_cali.receive_success_flag == 1)      //ÓëGUI²Ëµ¥µ÷ÊÔÅäºÏ
+//		if(pc_cali.receive_success_flag == 1)      //ä¸ŽGUIèœå•è°ƒè¯•é…åˆ
 //		{
-//			type_conversion(&pc_cali);             //ÀàÐÍ×ª»»×ªÎªfloat
-//			various_types_pid_update(&pc_cali);    //pidÊý¾Ý¸üÐÂ ½ÓÊÕÒ»´Î¸üÐÂÒ»´Î
+//			type_conversion(&pc_cali);             //ç±»åž‹è½¬æ¢è½¬ä¸ºfloat
+//			various_types_pid_update(&pc_cali);    //pidæ•°æ®æ›´æ–° æŽ¥æ”¶ä¸€æ¬¡æ›´æ–°ä¸€æ¬¡
 //			pc_cali.receive_success_flag = 0;
 //			pc_cali.beep_flag = 1;
 
@@ -354,16 +354,16 @@
 //				pc_cali.beep_flag = 0;
 //			}
 //		}
-//		//taskENTER_CRITICAL(); //½øÈëÁÙ½çÇø·¢ËÍ·ÀÖ¹Êý¾Ý±»´ò¶Ï
-//		send_state_data_package(&pc_cali_tx);//·¢ËÍ³µ×Ó×´Ì¬Êý¾Ý°ü
+//		//taskENTER_CRITICAL(); //è¿›å…¥ä¸´ç•ŒåŒºå‘é€é˜²æ­¢æ•°æ®è¢«æ‰“æ–­
+//		send_state_data_package(&pc_cali_tx);//å‘é€è½¦å­çŠ¶æ€æ•°æ®åŒ…
 //		//taskEXIT_CRITICAL();            	
-//		cali_various_motor_pid(&gimbal_pid, &cali_gimbal_pid,//¸üÐÂpid
+//		cali_various_motor_pid(&gimbal_pid, &cali_gimbal_pid,//æ›´æ–°pid
 //							   &shoot_pid, &cali_shoot_pid);
 //		// Virtual_var[0] = gimbal_control_data.gimbal_INS->gyro_x;
 //		// vcan_sendware((uint8_t *)Virtual_var, sizeof(Virtual_var));
 
 //	
-//		vTaskDelay(100);          //100msÒ»´Î
+//		vTaskDelay(100);          //100msä¸€æ¬¡
 //		
 //    }
 //}
