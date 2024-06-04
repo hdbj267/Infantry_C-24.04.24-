@@ -75,6 +75,7 @@ void shoot_heat_limit(void)     /*没用上，操作手看ui界面来控制热�
   * @note           
   */
 int allow_shoot_speed=500;
+float bullet_speed=18;
 extern vision_control_data_t control_data;
 //int shoot_B;
 void shoot_speed_limit(void)     //18的要小心     *hyj		***
@@ -89,9 +90,9 @@ void shoot_speed_limit(void)     //18的要小心     *hyj		***
 //		default:  break;
 //	}
 	if(control_data.Target_distance<1000)//
-		shoot_mag.allow_shoot_speed = (18-30)/15*340+1000;	//在开自瞄时，近距离应该弹速小一些，不然子弹容易反弹到自己的装甲板
+		shoot_mag.allow_shoot_speed = ((bullet_speed-2)-30)/15*340+1000;	//在开自瞄时，近距离应该弹速小一些，不然子弹容易反弹到自己的装甲板
 	else
-	shoot_mag.allow_shoot_speed = (28-30)/15*340+1000;//23届弹速无限制，30m/s都可以，后面把这个自变量换成裁判系统限制的最大弹速
+	shoot_mag.allow_shoot_speed = (bullet_speed-30)/15*340+1000;//23届弹速无限制，30m/s都可以，后面把这个自变量换成裁判系统限制的最大弹速
 	//y=(x-x2)/(x1-x2)*(y1-y2)+y2  (15,660) (30,1000) 两点式，自变量是弹速，结果是摩擦轮速度      
 
 	
